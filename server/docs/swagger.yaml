@@ -1,0 +1,476 @@
+basePath: /api/mobile
+definitions:
+  load.MeasuresInput:
+    properties:
+      cow:
+        allOf:
+        - $ref: '#/definitions/models.Cow'
+        description: Загружаемая корова
+      measures:
+        allOf:
+        - $ref: '#/definitions/models.Measures'
+        description: Замеры коровы
+      ratings:
+        allOf:
+        - $ref: '#/definitions/models.Exterior'
+        description: Оценки коровы
+    type: object
+  models.Cow:
+    properties:
+      birthDate:
+        description: Дата рождения ГГГГ-ММ-ЧЧ
+        example: "2001-03-23"
+        type: string
+      bloody:
+        description: Кровность
+        example: 1
+        type: number
+      breedName:
+        description: Название породы
+        example: Порода
+        type: string
+      inventoryNumber:
+        description: Инвентарный номер коровы
+        example: "1213321"
+        type: string
+      name:
+        description: Кличка коровы
+        example: Дима
+        type: string
+      rshnnumber:
+        description: РСХН номер коровы
+        example: "1323323232"
+        type: string
+      selecsNumber:
+        description: Селекс номер коровы
+        example: 98989
+        type: integer
+    type: object
+  models.Exterior:
+    properties:
+      backBoneQuality:
+        description: Дополнительные (8 признаков)
+        type: number
+      backNippleDiameter:
+        description: Диаметр задних сосков (9 баллов)
+        type: number
+      backNippleLocationBackView:
+        description: Расположение задних сосков вид сзади (9 баллов)
+        type: number
+      backUdderSegmentsLocationHeight:
+        description: Высота прикрепления задних долей вымени (9 баллов)
+        type: number
+      backUdderSegmentsWidth:
+        description: Ширина задних долей вымени (9 баллов)
+        type: number
+      body:
+        description: Туловище (100 баллов)
+        type: number
+      bodyDepth:
+        description: Глубина туловища (9 баллов)
+        type: number
+      bodyType:
+        description: Тип телосложения (9 баллов)
+        type: number
+      centralLigamentDepth:
+        description: Глубина центральной связки (9 баллов)
+        type: number
+      chestWidth:
+        description: Телосложение (8 признаков)
+        type: number
+      deception:
+        description: Обмускульность (9 баллов)
+        type: number
+      fatness:
+        description: Упитанность (9 баллов)
+        type: number
+      foreheadHeight:
+        description: Высота лба (9 баллов)
+        type: number
+      foreheadWidth:
+        description: Самодельные 9-бальные признаки
+        type: number
+      forelegWalk:
+        description: Поступь передних ног (9 баллов)
+        type: number
+      frontNippleDiameter:
+        description: Диаметр передних сосков (9 балов)
+        type: number
+      frontNippleLength:
+        description: Длинна передних сосков (9 баллов)
+        type: number
+      frontNippleLocationBackView:
+        description: Расположение передних сосков вид сзади (9 баллов)
+        type: number
+      frontUdderSegmentsLocation:
+        description: Прикрепление передних долей вымени (9 баллов)
+        type: number
+      harmonyOfMovement:
+        description: Конечности (5 признаков)
+        type: number
+      hindLegWalkBackView:
+        description: Поступь задних ног cзади (9 баллов)
+        type: number
+      hindLegWalkSideView:
+        description: Поступь задних ног сбоку (9 баллов)
+        type: number
+      hoofAngle:
+        description: Угол копыта (9 баллов)
+        type: number
+      limbs:
+        description: Конечности (100 баллов)
+        type: number
+      milkType:
+        description: 100 бальные
+        type: number
+      rating:
+        description: Суммарный рейтинг (100 баллов)
+        type: number
+      ribsAngle:
+        description: Угол наклона ребер (9 баллов)
+        type: number
+      sacrum:
+        description: Крестец (100 баллов)
+        type: number
+      sacrumAngle:
+        description: Угол наклона крестца (9 баллов)
+        type: number
+      sacrumHeight:
+        description: высота в крестце (9 баллов)
+        type: number
+      sacrumLength:
+        description: Длина крестца (9 баллов)
+        type: number
+      sacrumWidth:
+        description: ширина в крестце (9 баллов)
+        type: number
+      topLine:
+        description: Линия верха (9 баллов)
+        type: number
+      udder:
+        description: Вымя (100 баллов)
+        type: number
+      udderBalance:
+        description: Баланс вымени (9 баллов)
+        type: number
+      udderDepth:
+        description: Вымя (8 признаков)
+        type: number
+      udderVeins:
+        description: Выраженность вен вымени (9 баллов)
+        type: number
+    type: object
+  models.Measures:
+    properties:
+      backNippleDiameter:
+        description: Диаметр задних сосков (Сантиметры или градусы)
+        type: number
+      backUdderSegmentsLocationHeight:
+        description: Высота прикрепления задних долей вымени (Сантиметры или градусы)
+        type: number
+      backUdderSegmentsWidth:
+        description: Ширина задних долей вымени (Сантиметры или градусы)
+        type: number
+      centralLigamentDepth:
+        description: Глубина центральной связки (Сантиметры или градусы)
+        type: number
+      chestWidth:
+        description: Ширина груди (Сантиметры или градусы)
+        type: number
+      foreheadHeight:
+        description: Высота лба (Сантиметры)
+        type: number
+      foreheadWidth:
+        description: Самодельные 9-бальные признаки
+        type: number
+      frontNippleDiameter:
+        description: Диаметр передних сосков (Сантиметры или градусы)
+        type: number
+      frontNippleLength:
+        description: Длинна передних сосков (Сантиметры или градусы)
+        type: number
+      frontUdderSegmentsLocation:
+        description: Прикрепление передних долей вымени (Сантиметры или градусы)
+        type: number
+      hindLegWalkSideView:
+        description: Конечности (5 признаков)
+        type: number
+      hoofAngle:
+        description: Угол копыта (Сантиметры или градусы)
+        type: number
+      sacrumAngle:
+        description: Угол наклона крестца (Сантиметры или градусы)
+        type: number
+      sacrumHeight:
+        description: Телосложение (8 признаков)
+        type: number
+      sacrumWidth:
+        description: ширина в крестце (Сантиметры или градусы)
+        type: number
+      udderBalance:
+        description: Дополнительные (8 признаков)
+        type: number
+      udderDepth:
+        description: Вымя (8 признаков)
+        type: number
+    type: object
+  user.ConfirmMailRequest:
+    properties:
+      code:
+        description: Код с эл. почты пользователя
+        example: "3295"
+        type: string
+      userData:
+        description: Зашифрованные данные пользователя из Register
+        example: 12308mjkfa01jkfa_!@#
+        type: string
+    type: object
+  user.LoginData:
+    properties:
+      email:
+        description: Почта пользователя
+        example: user@mail.ru
+        type: string
+      password:
+        description: Пароль пользователя
+        example: samplePassword123
+        type: string
+    type: object
+  user.RefreshRequest:
+    properties:
+      refreshToken:
+        description: refresh токен
+        example: queuefjad1908)fd_?1
+        type: string
+    type: object
+  user.RegisterRequest:
+    properties:
+      email:
+        description: Почта
+        example: User321@gmail.com
+        type: string
+      nameSurnamePatronymic:
+        description: Фио
+        example: Иванов Федор Петрович
+        type: string
+      password:
+        description: Пароль
+        example: FedorsPassword15
+        type: string
+    type: object
+externalDocs:
+  description: OpenAPI
+  url: https://swagger.io/resources/open-api/
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: |-
+    Сваггер сгенерирован из кода, поэтому может содержать неточности. По мере возможности они будут описаны далее
+    Все даты передаются как строки
+    Большая часть рутов не возвращает вложенные объекты
+    Авторизация по JWT, стандартная
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: GenMilk mobile API
+  version: "1.0"
+paths:
+  /load/measuredData:
+    post:
+      description: |-
+        Принимает данные оценки, парсит, создает запись в БД
+        В случае успеха возвращает словарь с ключем "status" и значением "ok"
+        В случае ошибки возвращает словарь с ключем "error" и строкой ошибки
+      parameters:
+      - description: Данные измерения коровы
+        in: body
+        name: measures
+        required: true
+        schema:
+          $ref: '#/definitions/load.MeasuresInput'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Рут загрузки данных измерения коровы
+      tags:
+      - Load
+  /user/confirmMail:
+    post:
+      description: |-
+        Подтверждение почты пользователя. После подтверждения пользователь становится зарегистрированным
+        В случае успеха возвращает словарь с ключем "status" и значением "ok"
+        В случае ошибки возвращает словарь с ключем "error" и строкой ошибки
+      parameters:
+      - description: Данные для подтверждения
+        in: body
+        name: confirmationData
+        required: true
+        schema:
+          $ref: '#/definitions/user.ConfirmMailRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Register new user
+      tags:
+      - Register
+  /user/login:
+    post:
+      description: |-
+        Рут логина
+        В случае успеха возвращает словарь с ключем "access" и значением access токена и ключем "refresh" и значение refresh токена
+        В случае ошибки возвращает словарь с ключем "error" и строкой ошибки
+      parameters:
+      - description: Почта и пароль
+        in: body
+        name: loginData
+        required: true
+        schema:
+          $ref: '#/definitions/user.LoginData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Login
+      tags:
+      - Login
+  /user/refresh:
+    post:
+      description: |-
+        Рут обновления access токена
+        В случае успеха возвращает словарь с ключем "access" и значением access токена и ключем "refresh" и значение refresh токена (переданное)
+        В случае ошибки возвращает словарь с ключем "error" и строкой ошибки
+      parameters:
+      - description: refresh токен
+        in: body
+        name: refreshToken
+        required: true
+        schema:
+          $ref: '#/definitions/user.RefreshRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Refresh access token
+      tags:
+      - Login
+  /user/register:
+    post:
+      description: |-
+        Регистрация пользователя
+        В случае успеха возвращает словарь с ключем "userData" и значением зашифрованных данных пользователя, которые нужно будет передать в confirmMail
+        В случае ошибки возвращает словарь с ключем "error" и строкой ошибки
+      parameters:
+      - description: Данные регистрации пользователя
+        in: body
+        name: registerData
+        required: true
+        schema:
+          $ref: '#/definitions/user.RegisterRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Register new user
+      tags:
+      - Register
+securityDefinitions:
+  BasicAuth:
+    type: basic
+swagger: "2.0"

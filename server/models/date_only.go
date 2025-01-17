@@ -31,6 +31,11 @@ func (do DateOnly) MarshalJSON() ([]byte, error) {
 	return json.Marshal(timeStr)
 }
 
+func (do *DateOnly) UnmarshalJSON(data []byte) (err error) {
+	do.Time, err = time.Parse(time.DateOnly, string(data[1:len(data)-1]))
+	return
+}
+
 func (do *DateOnly) ToTime() time.Time {
 	return do.Add(0)
 }
