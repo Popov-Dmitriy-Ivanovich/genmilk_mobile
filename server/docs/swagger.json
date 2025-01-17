@@ -15,7 +15,7 @@
         },
         "version": "1.0"
     },
-    "host": "77.221.145.143",
+    "host": "77.221.145.143:8080",
     "basePath": "/api/mobile",
     "paths": {
         "/load/measuredData": {
