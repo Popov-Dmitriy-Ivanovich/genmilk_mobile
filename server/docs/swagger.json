@@ -362,7 +362,7 @@
             "type": "object",
             "properties": {
                 "backBoneQuality": {
-                    "description": "Дополнительные (8 признаков)",
+                    "description": "качество костяка (9 баллов)",
                     "type": "number"
                 },
                 "backNippleDiameter": {
@@ -398,7 +398,7 @@
                     "type": "number"
                 },
                 "chestWidth": {
-                    "description": "Телосложение (8 признаков)",
+                    "description": "Ширина груди (9 баллов)",
                     "type": "number"
                 },
                 "deception": {
@@ -414,7 +414,7 @@
                     "type": "number"
                 },
                 "foreheadWidth": {
-                    "description": "Самодельные 9-бальные признаки",
+                    "description": "Ширина лба (9 баллов)",
                     "type": "number"
                 },
                 "forelegWalk": {
@@ -438,7 +438,7 @@
                     "type": "number"
                 },
                 "harmonyOfMovement": {
-                    "description": "Конечности (5 признаков)",
+                    "description": "Гармоничность движения (9 баллов)",
                     "type": "number"
                 },
                 "hindLegWalkBackView": {
@@ -458,7 +458,7 @@
                     "type": "number"
                 },
                 "milkType": {
-                    "description": "100 бальные",
+                    "description": "Молочный тип (100 баллов)",
                     "type": "number"
                 },
                 "rating": {
@@ -502,7 +502,7 @@
                     "type": "number"
                 },
                 "udderDepth": {
-                    "description": "Вымя (8 признаков)",
+                    "description": "Глубина вымени (9 баллов)",
                     "type": "number"
                 },
                 "udderVeins": {
@@ -539,7 +539,7 @@
                     "type": "number"
                 },
                 "foreheadWidth": {
-                    "description": "Самодельные 9-бальные признаки",
+                    "description": "Ширина лба (Сантиметры)",
                     "type": "number"
                 },
                 "frontNippleDiameter": {
@@ -555,7 +555,7 @@
                     "type": "number"
                 },
                 "hindLegWalkSideView": {
-                    "description": "Конечности (5 признаков)",
+                    "description": "Поступь задних ног сбоку (Сантиметры или градусы)",
                     "type": "number"
                 },
                 "hoofAngle": {
@@ -567,7 +567,7 @@
                     "type": "number"
                 },
                 "sacrumHeight": {
-                    "description": "Телосложение (8 признаков)",
+                    "description": "высота в крестце (Сантиметры или градусы)",
                     "type": "number"
                 },
                 "sacrumWidth": {
@@ -575,11 +575,11 @@
                     "type": "number"
                 },
                 "udderBalance": {
-                    "description": "Дополнительные (8 признаков)",
+                    "description": "Баланс вымени (Сантиметры или градусы)",
                     "type": "number"
                 },
                 "udderDepth": {
-                    "description": "Вымя (8 признаков)",
+                    "description": "Глубина вымени (Сантиметры или градусы)",
                     "type": "number"
                 }
             }

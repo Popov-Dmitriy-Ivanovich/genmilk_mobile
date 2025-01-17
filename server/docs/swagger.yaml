@@ -49,7 +49,7 @@ definitions:
   models.Exterior:
     properties:
       backBoneQuality:
-        description: Дополнительные (8 признаков)
+        description: качество костяка (9 баллов)
         type: number
       backNippleDiameter:
         description: Диаметр задних сосков (9 баллов)
@@ -76,7 +76,7 @@ definitions:
         description: Глубина центральной связки (9 баллов)
         type: number
       chestWidth:
-        description: Телосложение (8 признаков)
+        description: Ширина груди (9 баллов)
         type: number
       deception:
         description: Обмускульность (9 баллов)
@@ -88,7 +88,7 @@ definitions:
         description: Высота лба (9 баллов)
         type: number
       foreheadWidth:
-        description: Самодельные 9-бальные признаки
+        description: Ширина лба (9 баллов)
         type: number
       forelegWalk:
         description: Поступь передних ног (9 баллов)
@@ -106,7 +106,7 @@ definitions:
         description: Прикрепление передних долей вымени (9 баллов)
         type: number
       harmonyOfMovement:
-        description: Конечности (5 признаков)
+        description: Гармоничность движения (9 баллов)
         type: number
       hindLegWalkBackView:
         description: Поступь задних ног cзади (9 баллов)
@@ -121,7 +121,7 @@ definitions:
         description: Конечности (100 баллов)
         type: number
       milkType:
-        description: 100 бальные
+        description: Молочный тип (100 баллов)
         type: number
       rating:
         description: Суммарный рейтинг (100 баллов)
@@ -154,7 +154,7 @@ definitions:
         description: Баланс вымени (9 баллов)
         type: number
       udderDepth:
-        description: Вымя (8 признаков)
+        description: Глубина вымени (9 баллов)
         type: number
       udderVeins:
         description: Выраженность вен вымени (9 баллов)
@@ -181,7 +181,7 @@ definitions:
         description: Высота лба (Сантиметры)
         type: number
       foreheadWidth:
-        description: Самодельные 9-бальные признаки
+        description: Ширина лба (Сантиметры)
         type: number
       frontNippleDiameter:
         description: Диаметр передних сосков (Сантиметры или градусы)
@@ -193,7 +193,7 @@ definitions:
         description: Прикрепление передних долей вымени (Сантиметры или градусы)
         type: number
       hindLegWalkSideView:
-        description: Конечности (5 признаков)
+        description: Поступь задних ног сбоку (Сантиметры или градусы)
         type: number
       hoofAngle:
         description: Угол копыта (Сантиметры или градусы)
@@ -202,16 +202,16 @@ definitions:
         description: Угол наклона крестца (Сантиметры или градусы)
         type: number
       sacrumHeight:
-        description: Телосложение (8 признаков)
+        description: высота в крестце (Сантиметры или градусы)
         type: number
       sacrumWidth:
         description: ширина в крестце (Сантиметры или градусы)
         type: number
       udderBalance:
-        description: Дополнительные (8 признаков)
+        description: Баланс вымени (Сантиметры или градусы)
         type: number
       udderDepth:
-        description: Вымя (8 признаков)
+        description: Глубина вымени (Сантиметры или градусы)
         type: number
     type: object
   user.ConfirmMailRequest:
