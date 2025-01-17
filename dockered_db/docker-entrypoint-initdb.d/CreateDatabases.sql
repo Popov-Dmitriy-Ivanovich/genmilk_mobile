@@ -1,0 +1,1 @@
+CREATE DATABASE cow_mobile WITH OWNER = habrpguser;
