@@ -108,6 +108,7 @@ func (u User) ConfirmMail() gin.HandlerFunc {
 		confirmReq := ConfirmMailRequest{}
 		if err := c.ShouldBind(&confirmReq); err != nil {
 			c.JSON(422, gin.H{"error": err.Error()})
+			return
 		}
 		regData := RegisterUserData{}
 		token, err := jwt.ParseWithClaims(confirmReq.UserData, &regData, func(token *jwt.Token) (interface{}, error) {
@@ -119,6 +120,7 @@ func (u User) ConfirmMail() gin.HandlerFunc {
 		}
 		if confirmReq.Code != strconv.FormatUint(uint64(regData.Code), 10) {
 			c.JSON(406, gin.H{"error": "Неверный код подтверждения"})
+			return
 		}
 		db := models.GetDatabase()
 		newUser := models.User{}
@@ -134,6 +136,7 @@ func (u User) ConfirmMail() gin.HandlerFunc {
 
 		if err := db.Create(&newUser).Error; err != nil {
 			c.JSON(500, gin.H{"error": err.Error()})
+			return
 		}
 		c.JSON(200, gin.H{"status": "ok"})
 	}
