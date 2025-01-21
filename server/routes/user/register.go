@@ -110,7 +110,7 @@ func (u User) ConfirmMail() gin.HandlerFunc {
 			c.JSON(422, gin.H{"error": err.Error()})
 		}
 		regData := RegisterUserData{}
-		token, err := jwt.ParseWithClaims(confirmReq.UserData, regData, func(token *jwt.Token) (interface{}, error) {
+		token, err := jwt.ParseWithClaims(confirmReq.UserData, &regData, func(token *jwt.Token) (interface{}, error) {
 			return []byte(os.Getenv("JWT_KEY")), nil
 		})
 		if err != nil || !token.Valid {
