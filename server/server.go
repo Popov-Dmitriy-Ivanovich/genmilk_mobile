@@ -2,6 +2,7 @@ package main
 
 import (
 	_ "cow_backend_mobile/docs"
+	"cow_backend_mobile/models"
 	"cow_backend_mobile/routes"
 	"cow_backend_mobile/routes/load"
 	"cow_backend_mobile/routes/user"
@@ -42,7 +43,7 @@ func main() {
 	r := gin.Default()
 	apiGroup := r.Group("/api/mobile")
 	routes.WriteRoutes(apiGroup, &load.Load{}, &user.User{})
-
+	models.GetDatabase()
 	apiGroup.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	//apiGroup.Static("/static", "static")
 	r.Run()
