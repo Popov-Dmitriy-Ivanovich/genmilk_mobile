@@ -6,10 +6,12 @@ import (
 	"cow_backend_mobile/routes"
 	"cow_backend_mobile/routes/load"
 	"cow_backend_mobile/routes/user"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
+	"time"
 )
 
 // @title           GenMilk mobile API
@@ -41,6 +43,22 @@ func main() {
 		panic(err)
 	}
 	r := gin.Default()
+	// CORS for https://foo.com and https://github.com origins, allowing:
+	// - PUT and PATCH methods
+	// - Origin header
+	// - Credentials share
+	// - Preflight requests cached for 12 hours
+	r.Use(cors.New(cors.Config{
+		AllowOrigins:           []string{"*"},
+		AllowMethods:           []string{"PUT", "PATCH", "POST", "OPTIONS", "DELETE", "GET", "HEAD"},
+		AllowHeaders:           []string{"content-type", "Authorization", "authorization"},
+		ExposeHeaders:          []string{"Content-Length"},
+		AllowCredentials:       true,
+		AllowWildcard:          true,
+		AllowBrowserExtensions: true,
+		MaxAge:                 12 * time.Hour,
+	}))
+
 	apiGroup := r.Group("/api/mobile")
 	routes.WriteRoutes(apiGroup, &load.Load{}, &user.User{})
 	models.GetDatabase()

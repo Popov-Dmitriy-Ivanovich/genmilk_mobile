@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v4"
 	"golang.org/x/crypto/bcrypt"
+	"log"
 	"math/rand/v2"
 	"net/http"
 	"net/smtp"
@@ -14,9 +15,9 @@ import (
 )
 
 type RegisterRequest struct {
-	Email                 string `example:"User321@gmail.com"`     // Почта
-	NameSurnamePatronymic string `example:"Иванов Федор Петрович"` // Фио
-	Password              string `example:"FedorsPassword15"`      // Пароль
+	Email                 string `example:"User321@gmail.com" binding:"required"`      // Почта
+	NameSurnamePatronymic string `example:"Иванов Федор Петрович" binding:"required" ` // Фио
+	Password              string `example:"FedorsPassword15" binding:"required"`       // Пароль
 	LicenseNumber         *string
 }
 
@@ -78,7 +79,7 @@ func (u User) Register() gin.HandlerFunc {
 			"\r\n" +
 			"Код подтверждения электронной почты:  " + strconv.FormatUint(uint64(code), 10) + " .\r\n")
 		auth := smtp.PlainAuth("", from, password, smtpHost)
-
+		log.Println("Email to: ", to)
 		if err := smtp.SendMail(smtpHost+":"+smtpPort, auth, from, to, message); err != nil {
 			c.JSON(500, gin.H{"error": err.Error()})
 			return
