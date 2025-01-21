@@ -546,6 +546,8 @@ definitions:
         description: Почта
         example: User321@gmail.com
         type: string
+      licenseNumber:
+        type: string
       nameSurnamePatronymic:
         description: Фио
         example: Иванов Федор Петрович

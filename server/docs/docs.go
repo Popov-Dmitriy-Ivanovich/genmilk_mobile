@@ -1147,6 +1147,9 @@ const docTemplate = `{
                     "type": "string",
                     "example": "User321@gmail.com"
                 },
+                "licenseNumber": {
+                    "type": "string"
+                },
                 "nameSurnamePatronymic": {
                     "description": "Фио",
                     "type": "string",
