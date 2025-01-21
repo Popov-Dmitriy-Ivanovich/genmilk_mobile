@@ -26,7 +26,7 @@ const docTemplate = `{
     "paths": {
         "/load/measuredData": {
             "post": {
-                "description": "Принимает данные оценки, парсит, создает запись в БД.\nВ случае успеха возвращает словарь с ключем \"status\" и значением \"ok\".\nВ случае ошибки возвращает словарь с ключем \"error\" и строкой ошибки.\nВ этом проекте предлагается хранить 4 группы 100-бальных оценок (с/без недостатками + авто/пользовательские).\nВ genmilk.ru хранится только одна группа 100-бальных признаков, поля MilkType, Body, Limbs ...\nв экстерьере означают те 100-бальные оценки, которые будут в базе genmilk.ru.",
+                "description": "Принимает данные оценки, парсит, создает запись в БД.\nВ случае успеха возвращает словарь с ключем \"status\" и значением \"ok\".\nВ случае ошибки возвращает словарь с ключем \"error\" и строкой ошибки.\nВ этом проекте предлагается хранить 4 группы 100-бальных оценок (с/без недостатками + авто/пользовательские).\nВ genmilk.ru хранится только одна группа 100-бальных признаков, поля MilkType, Body, Limbs ...\nв экстерьере означают те 100-бальные оценки, которые будут в базе genmilk.ru.\nРазделитель для строк, содержащих недостатки выбран из соображения о том, что URL работает с\nразделителем \"/\", других причин для выбора \"/\" нет, можно перевыбрать, это совершенно не принципиально",
                 "produces": [
                     "application/json"
                 ],
@@ -85,6 +85,58 @@ const docTemplate = `{
                 }
             }
         },
+        "/user/changePassword": {
+            "post": {
+                "description": "Смена пользовательского пароля\nВ случае успеха возвращает словарь с ключем \"userData\" и значением зашифрованных данных пользователя, которые нужно будет передать в confirmPassword\nВ случае ошибки возвращает словарь с ключем \"error\" и строкой ошибки",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ChangePassword"
+                ],
+                "summary": "Change password for user",
+                "parameters": [
+                    {
+                        "description": "Данные смены пароля пользователя",
+                        "name": "registerData",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user.ChangePasswordRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/user/confirmMail": {
             "post": {
                 "description": "Подтверждение почты пользователя. После подтверждения пользователь становится зарегистрированным\nВ случае успеха возвращает словарь с ключем \"status\" и значением \"ok\"\nВ случае ошибки возвращает словарь с ключем \"error\" и строкой ошибки",
@@ -103,6 +155,58 @@ const docTemplate = `{
                         "required": true,
                         "schema": {
                             "$ref": "#/definitions/user.ConfirmMailRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/user/confirmPassword": {
+            "post": {
+                "description": "Подтверждение смены пароля пользователя. После подтверждения у пользователя меняется пароль\nВ случае успеха возвращает словарь с ключем \"status\" и значением \"ok\"\nВ случае ошибки возвращает словарь с ключем \"error\" и строкой ошибки",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ChangePassword"
+                ],
+                "summary": "Confirm password change",
+                "parameters": [
+                    {
+                        "description": "Данные для подтверждения",
+                        "name": "confirmationData",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/user.ConfirmPasswordRequest"
                         }
                     }
                 ],
@@ -965,7 +1069,37 @@ const docTemplate = `{
                 }
             }
         },
+        "user.ChangePasswordRequest": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "description": "Почта",
+                    "type": "string",
+                    "example": "FedorsMail@gmail.com"
+                },
+                "password": {
+                    "description": "Пароль",
+                    "type": "string",
+                    "example": "FedorsPassword15"
+                }
+            }
+        },
         "user.ConfirmMailRequest": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "description": "Код с эл. почты пользователя",
+                    "type": "string",
+                    "example": "3295"
+                },
+                "userData": {
+                    "description": "Зашифрованные данные пользователя из Register",
+                    "type": "string",
+                    "example": "12308mjkfa01jkfa_!@#"
+                }
+            }
+        },
+        "user.ConfirmPasswordRequest": {
             "type": "object",
             "properties": {
                 "code": {

@@ -489,7 +489,29 @@ definitions:
         description: Вымя. Вес, определенный пользователем
         type: number
     type: object
+  user.ChangePasswordRequest:
+    properties:
+      email:
+        description: Почта
+        example: FedorsMail@gmail.com
+        type: string
+      password:
+        description: Пароль
+        example: FedorsPassword15
+        type: string
+    type: object
   user.ConfirmMailRequest:
+    properties:
+      code:
+        description: Код с эл. почты пользователя
+        example: "3295"
+        type: string
+      userData:
+        description: Зашифрованные данные пользователя из Register
+        example: 12308mjkfa01jkfa_!@#
+        type: string
+    type: object
+  user.ConfirmPasswordRequest:
     properties:
       code:
         description: Код с эл. почты пользователя
@@ -563,6 +585,8 @@ paths:
         В этом проекте предлагается хранить 4 группы 100-бальных оценок (с/без недостатками + авто/пользовательские).
         В genmilk.ru хранится только одна группа 100-бальных признаков, поля MilkType, Body, Limbs ...
         в экстерьере означают те 100-бальные оценки, которые будут в базе genmilk.ru.
+        Разделитель для строк, содержащих недостатки выбран из соображения о том, что URL работает с
+        разделителем "/", других причин для выбора "/" нет, можно перевыбрать, это совершенно не принципиально
       parameters:
       - description: Данные измерения коровы
         in: body
@@ -600,6 +624,43 @@ paths:
       summary: Рут загрузки данных измерения коровы
       tags:
       - Load
+  /user/changePassword:
+    post:
+      description: |-
+        Смена пользовательского пароля
+        В случае успеха возвращает словарь с ключем "userData" и значением зашифрованных данных пользователя, которые нужно будет передать в confirmPassword
+        В случае ошибки возвращает словарь с ключем "error" и строкой ошибки
+      parameters:
+      - description: Данные смены пароля пользователя
+        in: body
+        name: registerData
+        required: true
+        schema:
+          $ref: '#/definitions/user.ChangePasswordRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Change password for user
+      tags:
+      - ChangePassword
   /user/confirmMail:
     post:
       description: |-
@@ -637,6 +698,43 @@ paths:
       summary: Register new user
       tags:
       - Register
+  /user/confirmPassword:
+    post:
+      description: |-
+        Подтверждение смены пароля пользователя. После подтверждения у пользователя меняется пароль
+        В случае успеха возвращает словарь с ключем "status" и значением "ok"
+        В случае ошибки возвращает словарь с ключем "error" и строкой ошибки
+      parameters:
+      - description: Данные для подтверждения
+        in: body
+        name: confirmationData
+        required: true
+        schema:
+          $ref: '#/definitions/user.ConfirmPasswordRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Confirm password change
+      tags:
+      - ChangePassword
   /user/login:
     post:
       description: |-
