@@ -6,9 +6,13 @@ import (
 )
 
 type MeasuresInput struct {
-	Cow      models.Cow      // Загружаемая корова
-	Ratings  models.Exterior // Оценки коровы
-	Measures models.Measures // Замеры коровы
+	Cow            models.Cow            // Загружаемая корова
+	Exterior       models.Exterior       // Экстерьер коровы
+	Measures       models.Measures       // Замеры коровы
+	DownSides      models.DownSides      // Недостатки
+	Ratings        models.Ratings        // Оценки экстерьера
+	AdditionalInfo models.AdditionalInfo // Доп. информация к измерению
+	Weights        models.Weights        // Веса использованные в расчете
 }
 
 type Load struct{}
@@ -20,9 +24,12 @@ func (l Load) WriteRoutes(rg *gin.RouterGroup) {
 
 // LoadMeasuredData
 // @Summary      Рут загрузки данных измерения коровы
-// @Description  Принимает данные оценки, парсит, создает запись в БД
-// @Description  В случае успеха возвращает словарь с ключем "status" и значением "ok"
-// @Description  В случае ошибки возвращает словарь с ключем "error" и строкой ошибки
+// @Description  Принимает данные оценки, парсит, создает запись в БД.
+// @Description  В случае успеха возвращает словарь с ключем "status" и значением "ok".
+// @Description  В случае ошибки возвращает словарь с ключем "error" и строкой ошибки.
+// @Description  В этом проекте предлагается хранить 4 группы 100-бальных оценок (с/без недостатками + авто/пользовательские).
+// @Description  В genmilk.ru хранится только одна группа 100-бальных признаков, поля MilkType, Body, Limbs ...
+// @Description  в экстерьере означают те 100-бальные оценки, которые будут в базе genmilk.ru.
 // @Param        measures    body     MeasuresInput true  "Данные измерения коровы"
 // @Tags         Load
 // @Produce      json

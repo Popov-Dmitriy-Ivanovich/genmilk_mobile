@@ -2,7 +2,7 @@ package models
 
 type Measures struct {
 	ID         uint `gorm:"primaryKey" json:"-"`
-	ExteriorID uint `json:"-"`
+	ExteriorID uint `json:"-" gorm:"index"`
 
 	SacrumHeight float64 // высота в крестце (Сантиметры или градусы)
 	ChestWidth   float64 // Ширина груди (Сантиметры или градусы)
@@ -22,7 +22,4 @@ type Measures struct {
 	UdderBalance        float64 // Баланс вымени (Сантиметры или градусы)
 	FrontNippleDiameter float64 // Диаметр передних сосков (Сантиметры или градусы)
 	BackNippleDiameter  float64 // Диаметр задних сосков (Сантиметры или градусы)
-
-	ForeheadWidth  float64 // Ширина лба (Сантиметры)
-	ForeheadHeight float64 // Высота лба (Сантиметры)
 }

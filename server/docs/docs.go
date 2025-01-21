@@ -26,7 +26,7 @@ const docTemplate = `{
     "paths": {
         "/load/measuredData": {
             "post": {
-                "description": "Принимает данные оценки, парсит, создает запись в БД\nВ случае успеха возвращает словарь с ключем \"status\" и значением \"ok\"\nВ случае ошибки возвращает словарь с ключем \"error\" и строкой ошибки",
+                "description": "Принимает данные оценки, парсит, создает запись в БД.\nВ случае успеха возвращает словарь с ключем \"status\" и значением \"ok\".\nВ случае ошибки возвращает словарь с ключем \"error\" и строкой ошибки.\nВ этом проекте предлагается хранить 4 группы 100-бальных оценок (с/без недостатками + авто/пользовательские).\nВ genmilk.ru хранится только одна группа 100-бальных признаков, поля MilkType, Body, Limbs ...\nв экстерьере означают те 100-бальные оценки, которые будут в базе genmilk.ru.",
                 "produces": [
                     "application/json"
                 ],
@@ -298,11 +298,35 @@ const docTemplate = `{
         "load.MeasuresInput": {
             "type": "object",
             "properties": {
+                "additionalInfo": {
+                    "description": "Доп. информация к измерению",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/models.AdditionalInfo"
+                        }
+                    ]
+                },
                 "cow": {
                     "description": "Загружаемая корова",
                     "allOf": [
                         {
                             "$ref": "#/definitions/models.Cow"
+                        }
+                    ]
+                },
+                "downSides": {
+                    "description": "Недостатки",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/models.DownSides"
+                        }
+                    ]
+                },
+                "exterior": {
+                    "description": "Экстерьер коровы",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/models.Exterior"
                         }
                     ]
                 },
@@ -315,12 +339,63 @@ const docTemplate = `{
                     ]
                 },
                 "ratings": {
-                    "description": "Оценки коровы",
+                    "description": "Оценки экстерьера",
                     "allOf": [
                         {
-                            "$ref": "#/definitions/models.Exterior"
+                            "$ref": "#/definitions/models.Ratings"
                         }
                     ]
+                },
+                "weights": {
+                    "description": "Веса использованные в расчете",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/models.Weights"
+                        }
+                    ]
+                }
+            }
+        },
+        "models.AdditionalInfo": {
+            "type": "object",
+            "properties": {
+                "additionalProperty1Measure": {
+                    "description": "Дополнительный параметр 1 (значение в единицах измерения)",
+                    "type": "string"
+                },
+                "additionalProperty1Name": {
+                    "description": "Дополнительный параметр 1 (название)",
+                    "type": "string"
+                },
+                "additionalProperty1Value": {
+                    "description": "Дополнительный параметр 1 (значение в баллах)",
+                    "type": "string"
+                },
+                "additionalProperty2Measure": {
+                    "description": "Дополнительный параметр 2 (значение в единицах измерения)",
+                    "type": "string"
+                },
+                "additionalProperty2Name": {
+                    "description": "Дополнительный параметр 2 (название)",
+                    "type": "string"
+                },
+                "additionalProperty2Value": {
+                    "description": "Дополнительный параметр 2 (значение в баллах)",
+                    "type": "string"
+                },
+                "calvingDate": {
+                    "description": "Дата отела ГГГГ-ММ-ДД",
+                    "type": "string",
+                    "example": "2001-03-23"
+                },
+                "firstMilkingDate": {
+                    "description": "Дата первого доения ГГГГ-ММ-ДД",
+                    "type": "string",
+                    "example": "2001-03-23"
+                },
+                "lactationNumber": {
+                    "description": "Номер лактации (целое, беззнаковое число)",
+                    "type": "integer"
                 }
             }
         },
@@ -341,6 +416,18 @@ const docTemplate = `{
                     "description": "Название породы",
                     "type": "string",
                     "example": "Порода"
+                },
+                "holdingInn": {
+                    "description": "ИНН холдинга",
+                    "type": "string"
+                },
+                "holdingName": {
+                    "description": "Название холдинга",
+                    "type": "string"
+                },
+                "hozName": {
+                    "description": "Название хозяйства",
+                    "type": "string"
                 },
                 "inventoryNumber": {
                     "description": "Инвентарный номер коровы",
@@ -364,9 +451,63 @@ const docTemplate = `{
                 }
             }
         },
+        "models.DownSides": {
+            "type": "object",
+            "properties": {
+                "bodyCount": {
+                    "description": "Туловище",
+                    "type": "number"
+                },
+                "bodyDescription": {
+                    "description": "Список недостатков туловища разделитель: \"/\"",
+                    "type": "string"
+                },
+                "limbsCount": {
+                    "description": "Конечности",
+                    "type": "number"
+                },
+                "limbsDescription": {
+                    "description": "Список недостатков конечностей разделитель: \"/\"",
+                    "type": "string"
+                },
+                "milkTypeCount": {
+                    "description": "Молочный тип",
+                    "type": "number"
+                },
+                "milkTypeDescription": {
+                    "description": "Список недостатков Молочного типа. Разделитель: \"/\"",
+                    "type": "string"
+                },
+                "sacrumCount": {
+                    "description": "Крестец",
+                    "type": "number"
+                },
+                "sacrumDescription": {
+                    "description": "Список недостатков крестца разделитель: \"/\"",
+                    "type": "string"
+                },
+                "summary": {
+                    "description": "Сводные данные о недостатках разделитель \"/\"",
+                    "type": "string"
+                },
+                "udderCount": {
+                    "description": "Вымя",
+                    "type": "number"
+                },
+                "udderDescription": {
+                    "description": "Список недостатков вымени разделитель: \"/\"",
+                    "type": "string"
+                }
+            }
+        },
         "models.Exterior": {
             "type": "object",
             "properties": {
+                "assessmentDate": {
+                    "description": "Дата проведения оценочных мероприятий ГГГГ-ММ-ДД",
+                    "type": "string",
+                    "example": "2001-03-23"
+                },
                 "backBoneQuality": {
                     "description": "качество костяка (9 баллов)",
                     "type": "number"
@@ -399,6 +540,10 @@ const docTemplate = `{
                     "description": "Тип телосложения (9 баллов)",
                     "type": "number"
                 },
+                "category": {
+                    "description": "Категория (хорошо, плохо и т.д.) ХЗ зачем это надо, но мало ли в разных хозяйствах категории разные",
+                    "type": "string"
+                },
                 "centralLigamentDepth": {
                     "description": "Глубина центральной связки (9 баллов)",
                     "type": "number"
@@ -413,14 +558,6 @@ const docTemplate = `{
                 },
                 "fatness": {
                     "description": "Упитанность (9 баллов)",
-                    "type": "number"
-                },
-                "foreheadHeight": {
-                    "description": "Высота лба (9 баллов)",
-                    "type": "number"
-                },
-                "foreheadWidth": {
-                    "description": "Ширина лба (9 баллов)",
                     "type": "number"
                 },
                 "forelegWalk": {
@@ -448,11 +585,11 @@ const docTemplate = `{
                     "type": "number"
                 },
                 "hindLegWalkBackView": {
-                    "description": "Поступь задних ног cзади (9 баллов)",
+                    "description": "Поступь задних ног вид cзади (9 баллов)",
                     "type": "number"
                 },
                 "hindLegWalkSideView": {
-                    "description": "Поступь задних ног сбоку (9 баллов)",
+                    "description": "Поступь задних ног вид сбоку (9 баллов)",
                     "type": "number"
                 },
                 "hoofAngle": {
@@ -540,14 +677,6 @@ const docTemplate = `{
                     "description": "Ширина груди (Сантиметры или градусы)",
                     "type": "number"
                 },
-                "foreheadHeight": {
-                    "description": "Высота лба (Сантиметры)",
-                    "type": "number"
-                },
-                "foreheadWidth": {
-                    "description": "Ширина лба (Сантиметры)",
-                    "type": "number"
-                },
                 "frontNippleDiameter": {
                     "description": "Диаметр передних сосков (Сантиметры или градусы)",
                     "type": "number"
@@ -586,6 +715,252 @@ const docTemplate = `{
                 },
                 "udderDepth": {
                     "description": "Глубина вымени (Сантиметры или градусы)",
+                    "type": "number"
+                }
+            }
+        },
+        "models.Ratings": {
+            "type": "object",
+            "properties": {
+                "automaticWithDownsidesBody": {
+                    "description": "Туловище (100 баллов) рассчитанный автоматически с учетом недостатков",
+                    "type": "number"
+                },
+                "automaticWithDownsidesLimbs": {
+                    "description": "Конечности (100 баллов) рассчитанный автоматически с учетом недостатков",
+                    "type": "number"
+                },
+                "automaticWithDownsidesMilkType": {
+                    "description": "Молочный тип (100 баллов) рассчитанный автоматически с учетом недостатков",
+                    "type": "number"
+                },
+                "automaticWithDownsidesSacrum": {
+                    "description": "Крестец (100 баллов) рассчитанный автоматически с учетом недостатков",
+                    "type": "number"
+                },
+                "automaticWithDownsidesUdder": {
+                    "description": "Вымя (100 баллов) рассчитанный автоматически с учетом недостатков",
+                    "type": "number"
+                },
+                "automaticWithoutDownsidesBody": {
+                    "description": "Туловище (100 баллов) рассчитанный автоматически без учета недостатков",
+                    "type": "number"
+                },
+                "automaticWithoutDownsidesLimbs": {
+                    "description": "Конечности (100 баллов) рассчитанный автоматически без учета недостатков",
+                    "type": "number"
+                },
+                "automaticWithoutDownsidesMilkType": {
+                    "description": "Молочный тип (100 баллов) рассчитанный автоматически без учета недостатков",
+                    "type": "number"
+                },
+                "automaticWithoutDownsidesSacrum": {
+                    "description": "Крестец (100 баллов) рассчитанный автоматически без учета недостатков",
+                    "type": "number"
+                },
+                "automaticWithoutDownsidesUdder": {
+                    "description": "Вымя (100 баллов) рассчитанный автоматически без учета недостатков",
+                    "type": "number"
+                },
+                "userDefinedWithDownsidesBody": {
+                    "description": "Туловище (100 баллов) с учетом недостатков, оценка пользователя",
+                    "type": "number"
+                },
+                "userDefinedWithDownsidesLimbs": {
+                    "description": "Конечности (100 баллов) с учетом недостатков, оценка пользователя",
+                    "type": "number"
+                },
+                "userDefinedWithDownsidesMilkType": {
+                    "description": "Молочный тип (100 баллов) с учетом недостатков, оценка пользователя",
+                    "type": "number"
+                },
+                "userDefinedWithDownsidesSacrum": {
+                    "description": "Крестец (100 баллов) с учетом недостатков, оценка пользователя",
+                    "type": "number"
+                },
+                "userDefinedWithDownsidesUdder": {
+                    "description": "Вымя (100 баллов) с учетом недостатков, оценка пользователя",
+                    "type": "number"
+                },
+                "userDefinedWithoutDownsidesBody": {
+                    "description": "Туловище (100 баллов) без учета недостатков, оценка пользователя",
+                    "type": "number"
+                },
+                "userDefinedWithoutDownsidesLimbs": {
+                    "description": "Конечности (100 баллов) без учета недостатков, оценка пользователя",
+                    "type": "number"
+                },
+                "userDefinedWithoutDownsidesMilkType": {
+                    "description": "Молочный тип (100 баллов) без учета недостатков, оценка пользователя",
+                    "type": "number"
+                },
+                "userDefinedWithoutDownsidesSacrum": {
+                    "description": "Крестец (100 баллов) без учета недостатков, оценка пользователя",
+                    "type": "number"
+                },
+                "userDefinedWithoutDownsidesUdder": {
+                    "description": "Вымя (100 баллов) без учета недостатков, оценка пользователя",
+                    "type": "number"
+                }
+            }
+        },
+        "models.Weights": {
+            "type": "object",
+            "properties": {
+                "automaticBody": {
+                    "description": "Туловище. Вес по методике",
+                    "type": "number"
+                },
+                "automaticLimbs": {
+                    "description": "Конечности. Вес по методике",
+                    "type": "number"
+                },
+                "automaticMilkType": {
+                    "description": "Молочный тип. Вес по методике",
+                    "type": "number"
+                },
+                "automaticSacrum": {
+                    "description": "Крестец. Вес по методике",
+                    "type": "number"
+                },
+                "automaticUdder": {
+                    "description": "Вымя. Вес по методике",
+                    "type": "number"
+                },
+                "backBoneQuality": {
+                    "description": "качество костяка",
+                    "type": "number"
+                },
+                "backNippleDiameter": {
+                    "description": "Диаметр задних сосков",
+                    "type": "number"
+                },
+                "backNippleLocationBackView": {
+                    "description": "Расположение задних сосков вид сзади",
+                    "type": "number"
+                },
+                "backUdderSegmentsLocationHeight": {
+                    "description": "Высота прикрепления задних долей вымени",
+                    "type": "number"
+                },
+                "backUdderSegmentsWidth": {
+                    "description": "Ширина задних долей вымени",
+                    "type": "number"
+                },
+                "bodyDepth": {
+                    "description": "Глубина туловища",
+                    "type": "number"
+                },
+                "bodyType": {
+                    "description": "Тип телосложения",
+                    "type": "number"
+                },
+                "centralLigamentDepth": {
+                    "description": "Глубина центральной связки",
+                    "type": "number"
+                },
+                "chestWidth": {
+                    "description": "Ширина груди",
+                    "type": "number"
+                },
+                "deception": {
+                    "description": "Обмускульность",
+                    "type": "number"
+                },
+                "fatness": {
+                    "description": "Упитанность",
+                    "type": "number"
+                },
+                "forelegWalk": {
+                    "description": "Поступь передних ног",
+                    "type": "number"
+                },
+                "frontNippleDiameter": {
+                    "description": "Диаметр передних сосков (9 балов)",
+                    "type": "number"
+                },
+                "frontNippleLength": {
+                    "description": "Длинна передних сосков",
+                    "type": "number"
+                },
+                "frontNippleLocationBackView": {
+                    "description": "Расположение передних сосков вид сзади",
+                    "type": "number"
+                },
+                "frontUdderSegmentsLocation": {
+                    "description": "Прикрепление передних долей вымени",
+                    "type": "number"
+                },
+                "harmonyOfMovement": {
+                    "description": "Гармоничность движения",
+                    "type": "number"
+                },
+                "hindLegWalkBackView": {
+                    "description": "Поступь задних ног вид cзади",
+                    "type": "number"
+                },
+                "hindLegWalkSideView": {
+                    "description": "Поступь задних ног вид сбоку",
+                    "type": "number"
+                },
+                "hoofAngle": {
+                    "description": "Угол копыта",
+                    "type": "number"
+                },
+                "ribsAngle": {
+                    "description": "Угол наклона ребер",
+                    "type": "number"
+                },
+                "sacrumAngle": {
+                    "description": "Угол наклона крестца",
+                    "type": "number"
+                },
+                "sacrumHeight": {
+                    "description": "высота в крестце",
+                    "type": "number"
+                },
+                "sacrumLength": {
+                    "description": "Длина крестца",
+                    "type": "number"
+                },
+                "sacrumWidth": {
+                    "description": "ширина в крестце",
+                    "type": "number"
+                },
+                "topLine": {
+                    "description": "Линия верха",
+                    "type": "number"
+                },
+                "udderBalance": {
+                    "description": "Баланс вымени",
+                    "type": "number"
+                },
+                "udderDepth": {
+                    "description": "Глубина вымени",
+                    "type": "number"
+                },
+                "udderVeins": {
+                    "description": "Выраженность вен вымени",
+                    "type": "number"
+                },
+                "userDefinedBody": {
+                    "description": "Туловище. Вес, определенный пользователем",
+                    "type": "number"
+                },
+                "userDefinedLimbs": {
+                    "description": "Конечности. Вес, определенный пользователем",
+                    "type": "number"
+                },
+                "userDefinedMilkType": {
+                    "description": "Молочный тип. Вес, определенный пользователем",
+                    "type": "number"
+                },
+                "userDefinedSacrum": {
+                    "description": "Крестец. Вес, определенный пользователем",
+                    "type": "number"
+                },
+                "userDefinedUdder": {
+                    "description": "Вымя. Вес, определенный пользователем",
                     "type": "number"
                 }
             }

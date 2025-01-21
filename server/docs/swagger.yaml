@@ -2,18 +2,66 @@ basePath: /api/mobile
 definitions:
   load.MeasuresInput:
     properties:
+      additionalInfo:
+        allOf:
+        - $ref: '#/definitions/models.AdditionalInfo'
+        description: Доп. информация к измерению
       cow:
         allOf:
         - $ref: '#/definitions/models.Cow'
         description: Загружаемая корова
+      downSides:
+        allOf:
+        - $ref: '#/definitions/models.DownSides'
+        description: Недостатки
+      exterior:
+        allOf:
+        - $ref: '#/definitions/models.Exterior'
+        description: Экстерьер коровы
       measures:
         allOf:
         - $ref: '#/definitions/models.Measures'
         description: Замеры коровы
       ratings:
         allOf:
-        - $ref: '#/definitions/models.Exterior'
-        description: Оценки коровы
+        - $ref: '#/definitions/models.Ratings'
+        description: Оценки экстерьера
+      weights:
+        allOf:
+        - $ref: '#/definitions/models.Weights'
+        description: Веса использованные в расчете
+    type: object
+  models.AdditionalInfo:
+    properties:
+      additionalProperty1Measure:
+        description: Дополнительный параметр 1 (значение в единицах измерения)
+        type: string
+      additionalProperty1Name:
+        description: Дополнительный параметр 1 (название)
+        type: string
+      additionalProperty1Value:
+        description: Дополнительный параметр 1 (значение в баллах)
+        type: string
+      additionalProperty2Measure:
+        description: Дополнительный параметр 2 (значение в единицах измерения)
+        type: string
+      additionalProperty2Name:
+        description: Дополнительный параметр 2 (название)
+        type: string
+      additionalProperty2Value:
+        description: Дополнительный параметр 2 (значение в баллах)
+        type: string
+      calvingDate:
+        description: Дата отела ГГГГ-ММ-ДД
+        example: "2001-03-23"
+        type: string
+      firstMilkingDate:
+        description: Дата первого доения ГГГГ-ММ-ДД
+        example: "2001-03-23"
+        type: string
+      lactationNumber:
+        description: Номер лактации (целое, беззнаковое число)
+        type: integer
     type: object
   models.Cow:
     properties:
@@ -28,6 +76,15 @@ definitions:
       breedName:
         description: Название породы
         example: Порода
+        type: string
+      holdingInn:
+        description: ИНН холдинга
+        type: string
+      holdingName:
+        description: Название холдинга
+        type: string
+      hozName:
+        description: Название хозяйства
         type: string
       inventoryNumber:
         description: Инвентарный номер коровы
@@ -46,8 +103,48 @@ definitions:
         example: 98989
         type: integer
     type: object
+  models.DownSides:
+    properties:
+      bodyCount:
+        description: Туловище
+        type: number
+      bodyDescription:
+        description: 'Список недостатков туловища разделитель: "/"'
+        type: string
+      limbsCount:
+        description: Конечности
+        type: number
+      limbsDescription:
+        description: 'Список недостатков конечностей разделитель: "/"'
+        type: string
+      milkTypeCount:
+        description: Молочный тип
+        type: number
+      milkTypeDescription:
+        description: 'Список недостатков Молочного типа. Разделитель: "/"'
+        type: string
+      sacrumCount:
+        description: Крестец
+        type: number
+      sacrumDescription:
+        description: 'Список недостатков крестца разделитель: "/"'
+        type: string
+      summary:
+        description: Сводные данные о недостатках разделитель "/"
+        type: string
+      udderCount:
+        description: Вымя
+        type: number
+      udderDescription:
+        description: 'Список недостатков вымени разделитель: "/"'
+        type: string
+    type: object
   models.Exterior:
     properties:
+      assessmentDate:
+        description: Дата проведения оценочных мероприятий ГГГГ-ММ-ДД
+        example: "2001-03-23"
+        type: string
       backBoneQuality:
         description: качество костяка (9 баллов)
         type: number
@@ -72,6 +169,10 @@ definitions:
       bodyType:
         description: Тип телосложения (9 баллов)
         type: number
+      category:
+        description: Категория (хорошо, плохо и т.д.) ХЗ зачем это надо, но мало ли
+          в разных хозяйствах категории разные
+        type: string
       centralLigamentDepth:
         description: Глубина центральной связки (9 баллов)
         type: number
@@ -83,12 +184,6 @@ definitions:
         type: number
       fatness:
         description: Упитанность (9 баллов)
-        type: number
-      foreheadHeight:
-        description: Высота лба (9 баллов)
-        type: number
-      foreheadWidth:
-        description: Ширина лба (9 баллов)
         type: number
       forelegWalk:
         description: Поступь передних ног (9 баллов)
@@ -109,10 +204,10 @@ definitions:
         description: Гармоничность движения (9 баллов)
         type: number
       hindLegWalkBackView:
-        description: Поступь задних ног cзади (9 баллов)
+        description: Поступь задних ног вид cзади (9 баллов)
         type: number
       hindLegWalkSideView:
-        description: Поступь задних ног сбоку (9 баллов)
+        description: Поступь задних ног вид сбоку (9 баллов)
         type: number
       hoofAngle:
         description: Угол копыта (9 баллов)
@@ -177,12 +272,6 @@ definitions:
       chestWidth:
         description: Ширина груди (Сантиметры или градусы)
         type: number
-      foreheadHeight:
-        description: Высота лба (Сантиметры)
-        type: number
-      foreheadWidth:
-        description: Ширина лба (Сантиметры)
-        type: number
       frontNippleDiameter:
         description: Диаметр передних сосков (Сантиметры или градусы)
         type: number
@@ -212,6 +301,192 @@ definitions:
         type: number
       udderDepth:
         description: Глубина вымени (Сантиметры или градусы)
+        type: number
+    type: object
+  models.Ratings:
+    properties:
+      automaticWithDownsidesBody:
+        description: Туловище (100 баллов) рассчитанный автоматически с учетом недостатков
+        type: number
+      automaticWithDownsidesLimbs:
+        description: Конечности (100 баллов) рассчитанный автоматически с учетом недостатков
+        type: number
+      automaticWithDownsidesMilkType:
+        description: Молочный тип (100 баллов) рассчитанный автоматически с учетом
+          недостатков
+        type: number
+      automaticWithDownsidesSacrum:
+        description: Крестец (100 баллов) рассчитанный автоматически с учетом недостатков
+        type: number
+      automaticWithDownsidesUdder:
+        description: Вымя (100 баллов) рассчитанный автоматически с учетом недостатков
+        type: number
+      automaticWithoutDownsidesBody:
+        description: Туловище (100 баллов) рассчитанный автоматически без учета недостатков
+        type: number
+      automaticWithoutDownsidesLimbs:
+        description: Конечности (100 баллов) рассчитанный автоматически без учета
+          недостатков
+        type: number
+      automaticWithoutDownsidesMilkType:
+        description: Молочный тип (100 баллов) рассчитанный автоматически без учета
+          недостатков
+        type: number
+      automaticWithoutDownsidesSacrum:
+        description: Крестец (100 баллов) рассчитанный автоматически без учета недостатков
+        type: number
+      automaticWithoutDownsidesUdder:
+        description: Вымя (100 баллов) рассчитанный автоматически без учета недостатков
+        type: number
+      userDefinedWithDownsidesBody:
+        description: Туловище (100 баллов) с учетом недостатков, оценка пользователя
+        type: number
+      userDefinedWithDownsidesLimbs:
+        description: Конечности (100 баллов) с учетом недостатков, оценка пользователя
+        type: number
+      userDefinedWithDownsidesMilkType:
+        description: Молочный тип (100 баллов) с учетом недостатков, оценка пользователя
+        type: number
+      userDefinedWithDownsidesSacrum:
+        description: Крестец (100 баллов) с учетом недостатков, оценка пользователя
+        type: number
+      userDefinedWithDownsidesUdder:
+        description: Вымя (100 баллов) с учетом недостатков, оценка пользователя
+        type: number
+      userDefinedWithoutDownsidesBody:
+        description: Туловище (100 баллов) без учета недостатков, оценка пользователя
+        type: number
+      userDefinedWithoutDownsidesLimbs:
+        description: Конечности (100 баллов) без учета недостатков, оценка пользователя
+        type: number
+      userDefinedWithoutDownsidesMilkType:
+        description: Молочный тип (100 баллов) без учета недостатков, оценка пользователя
+        type: number
+      userDefinedWithoutDownsidesSacrum:
+        description: Крестец (100 баллов) без учета недостатков, оценка пользователя
+        type: number
+      userDefinedWithoutDownsidesUdder:
+        description: Вымя (100 баллов) без учета недостатков, оценка пользователя
+        type: number
+    type: object
+  models.Weights:
+    properties:
+      automaticBody:
+        description: Туловище. Вес по методике
+        type: number
+      automaticLimbs:
+        description: Конечности. Вес по методике
+        type: number
+      automaticMilkType:
+        description: Молочный тип. Вес по методике
+        type: number
+      automaticSacrum:
+        description: Крестец. Вес по методике
+        type: number
+      automaticUdder:
+        description: Вымя. Вес по методике
+        type: number
+      backBoneQuality:
+        description: качество костяка
+        type: number
+      backNippleDiameter:
+        description: Диаметр задних сосков
+        type: number
+      backNippleLocationBackView:
+        description: Расположение задних сосков вид сзади
+        type: number
+      backUdderSegmentsLocationHeight:
+        description: Высота прикрепления задних долей вымени
+        type: number
+      backUdderSegmentsWidth:
+        description: Ширина задних долей вымени
+        type: number
+      bodyDepth:
+        description: Глубина туловища
+        type: number
+      bodyType:
+        description: Тип телосложения
+        type: number
+      centralLigamentDepth:
+        description: Глубина центральной связки
+        type: number
+      chestWidth:
+        description: Ширина груди
+        type: number
+      deception:
+        description: Обмускульность
+        type: number
+      fatness:
+        description: Упитанность
+        type: number
+      forelegWalk:
+        description: Поступь передних ног
+        type: number
+      frontNippleDiameter:
+        description: Диаметр передних сосков (9 балов)
+        type: number
+      frontNippleLength:
+        description: Длинна передних сосков
+        type: number
+      frontNippleLocationBackView:
+        description: Расположение передних сосков вид сзади
+        type: number
+      frontUdderSegmentsLocation:
+        description: Прикрепление передних долей вымени
+        type: number
+      harmonyOfMovement:
+        description: Гармоничность движения
+        type: number
+      hindLegWalkBackView:
+        description: Поступь задних ног вид cзади
+        type: number
+      hindLegWalkSideView:
+        description: Поступь задних ног вид сбоку
+        type: number
+      hoofAngle:
+        description: Угол копыта
+        type: number
+      ribsAngle:
+        description: Угол наклона ребер
+        type: number
+      sacrumAngle:
+        description: Угол наклона крестца
+        type: number
+      sacrumHeight:
+        description: высота в крестце
+        type: number
+      sacrumLength:
+        description: Длина крестца
+        type: number
+      sacrumWidth:
+        description: ширина в крестце
+        type: number
+      topLine:
+        description: Линия верха
+        type: number
+      udderBalance:
+        description: Баланс вымени
+        type: number
+      udderDepth:
+        description: Глубина вымени
+        type: number
+      udderVeins:
+        description: Выраженность вен вымени
+        type: number
+      userDefinedBody:
+        description: Туловище. Вес, определенный пользователем
+        type: number
+      userDefinedLimbs:
+        description: Конечности. Вес, определенный пользователем
+        type: number
+      userDefinedMilkType:
+        description: Молочный тип. Вес, определенный пользователем
+        type: number
+      userDefinedSacrum:
+        description: Крестец. Вес, определенный пользователем
+        type: number
+      userDefinedUdder:
+        description: Вымя. Вес, определенный пользователем
         type: number
     type: object
   user.ConfirmMailRequest:
@@ -282,9 +557,12 @@ paths:
   /load/measuredData:
     post:
       description: |-
-        Принимает данные оценки, парсит, создает запись в БД
-        В случае успеха возвращает словарь с ключем "status" и значением "ok"
-        В случае ошибки возвращает словарь с ключем "error" и строкой ошибки
+        Принимает данные оценки, парсит, создает запись в БД.
+        В случае успеха возвращает словарь с ключем "status" и значением "ok".
+        В случае ошибки возвращает словарь с ключем "error" и строкой ошибки.
+        В этом проекте предлагается хранить 4 группы 100-бальных оценок (с/без недостатками + авто/пользовательские).
+        В genmilk.ru хранится только одна группа 100-бальных признаков, поля MilkType, Body, Limbs ...
+        в экстерьере означают те 100-бальные оценки, которые будут в базе genmilk.ru.
       parameters:
       - description: Данные измерения коровы
         in: body

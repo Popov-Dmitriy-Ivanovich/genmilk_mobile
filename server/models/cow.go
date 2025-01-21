@@ -9,5 +9,8 @@ type Cow struct {
 	BreedName       string     `example:"Порода"`                                         // Название породы
 	Bloody          float64    `example:"1.00"`                                           // Кровность
 	BirthDate       DateOnly   `json:",string" example:"2001-03-23" swaggertype:"string"` // Дата рождения ГГГГ-ММ-ЧЧ
-	Exteriors       []Exterior `json:"-"`                                                 // Оценки экстерьера
+	HoldingName     string     // Название холдинга
+	HoldingInn      string     // ИНН холдинга
+	HozName         string     // Название хозяйства
+	Exteriors       []Exterior `json:"-"` // Оценки экстерьера
 }
