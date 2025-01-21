@@ -17,6 +17,7 @@ type RegisterRequest struct {
 	Email                 string `example:"User321@gmail.com"`     // Почта
 	NameSurnamePatronymic string `example:"Иванов Федор Петрович"` // Фио
 	Password              string `example:"FedorsPassword15"`      // Пароль
+	LicenseNumber         *string
 }
 
 type RegisterUserData struct {
@@ -133,7 +134,7 @@ func (u User) ConfirmMail() gin.HandlerFunc {
 		newUser.Email = regData.Email
 		newUser.NameSurnamePatronymic = regData.NameSurnamePatronymic
 		newUser.Password = hashedPassword
-
+		newUser.LicenceNumber = regData.LicenseNumber
 		if err := db.Create(&newUser).Error; err != nil {
 			c.JSON(500, gin.H{"error": err.Error()})
 			return
