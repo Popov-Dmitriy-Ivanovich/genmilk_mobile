@@ -556,6 +556,10 @@ definitions:
         description: Пароль
         example: FedorsPassword15
         type: string
+    required:
+    - email
+    - nameSurnamePatronymic
+    - password
     type: object
 externalDocs:
   description: OpenAPI
@@ -571,6 +575,7 @@ info:
     Все даты передаются как строки
     Большая часть рутов не возвращает вложенные объекты
     Авторизация по JWT, стандартная
+    Все руты, которые требуют авторизации в теле запроса ожидают заголовок Authorization, в котором лежит строка формата "Bearer <ACCESS TOKEN>"
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
@@ -581,6 +586,7 @@ paths:
   /load/measuredData:
     post:
       description: |-
+        Требует авторизации!
         Принимает данные оценки, парсит, создает запись в БД.
         В случае успеха возвращает словарь с ключем "status" и значением "ok".
         В случае ошибки возвращает словарь с ключем "error" и строкой ошибки.
@@ -669,6 +675,8 @@ paths:
         Подтверждение почты пользователя. После подтверждения пользователь становится зарегистрированным
         В случае успеха возвращает словарь с ключем "status" и значением "ok"
         В случае ошибки возвращает словарь с ключем "error" и строкой ошибки
+        Код 406 - неверный код подтверждения
+        Код 409 - пользователь с таким email уже существует
       parameters:
       - description: Данные для подтверждения
         in: body
@@ -681,6 +689,18 @@ paths:
       responses:
         "200":
           description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "406":
+          description: Not Acceptable
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "409":
+          description: Conflict
           schema:
             additionalProperties:
               type: string
@@ -743,6 +763,7 @@ paths:
         Рут логина
         В случае успеха возвращает словарь с ключем "access" и значением access токена и ключем "refresh" и значение refresh токена
         В случае ошибки возвращает словарь с ключем "error" и строкой ошибки
+        В случае если пользователь не найден 404
       parameters:
       - description: Почта и пароль
         in: body
@@ -755,6 +776,12 @@ paths:
       responses:
         "200":
           description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
           schema:
             additionalProperties:
               type: string

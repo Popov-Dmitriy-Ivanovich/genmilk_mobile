@@ -20,6 +20,7 @@ import (
 // @description     Все даты передаются как строки
 // @description     Большая часть рутов не возвращает вложенные объекты
 // @description 	Авторизация по JWT, стандартная
+// @description     Все руты, которые требуют авторизации в теле запроса ожидают заголовок Authorization, в котором лежит строка формата "Bearer <ACCESS TOKEN>"
 // @termsOfService  http://swagger.io/terms/
 
 // @contact.name   API Support
