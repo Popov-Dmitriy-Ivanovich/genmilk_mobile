@@ -30,6 +30,7 @@ func (u User) Refresh() gin.HandlerFunc {
 		refreshReq := &RefreshRequest{}
 		if err := c.ShouldBind(refreshReq); err != nil {
 			c.JSON(422, gin.H{"error": err.Error()})
+			return
 		}
 
 		tokenString := strings.TrimPrefix(refreshReq.RefreshToken, "Bearer ")

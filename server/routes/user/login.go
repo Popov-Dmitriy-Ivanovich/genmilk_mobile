@@ -47,6 +47,7 @@ func (u User) Login() gin.HandlerFunc {
 
 		if err := bcrypt.CompareHashAndPassword(hashedPassword, []byte(loginData.Password)); err != nil {
 			c.JSON(401, gin.H{"error": "Пароли не совпадают", "message": err.Error()})
+			return
 		}
 
 		access, refresh, err := GenerateTokens(user.ID)
