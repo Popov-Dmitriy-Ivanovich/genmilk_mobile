@@ -1212,7 +1212,7 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "83.69.248.226:8080",
+	Host:             "cowconformationapp.ru",
 	BasePath:         "/api/mobile",
 	Schemes:          []string{},
 	Title:            "GenMilk mobile API",
