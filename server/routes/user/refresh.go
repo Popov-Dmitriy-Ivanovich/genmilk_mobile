@@ -9,7 +9,7 @@ import (
 )
 
 type RefreshRequest struct {
-	RefreshToken string `example:"queuefjad1908)fd_?1"` // refresh токен
+	RefreshToken string `example:"queuefjad1908)fd_?1" binding:"required"` // refresh токен
 }
 
 // Refresh
@@ -27,11 +27,12 @@ type RefreshRequest struct {
 // @Router       /user/refresh [post]
 func (u User) Refresh() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		if err := c.ShouldBind(&RefreshRequest{}); err != nil {
+		refreshReq := &RefreshRequest{}
+		if err := c.ShouldBind(refreshReq); err != nil {
 			c.JSON(422, gin.H{"error": err.Error()})
 		}
 
-		tokenString := strings.TrimPrefix(c.GetHeader("Authorization"), "Bearer ")
+		tokenString := strings.TrimPrefix(refreshReq.RefreshToken, "Bearer ")
 		tokenString = strings.TrimPrefix(tokenString, "bearer ")
 		authClaims := &RefreshTokenClaims{}
 		jwtToken, err := jwt.ParseWithClaims(tokenString, authClaims, func(token *jwt.Token) (interface{}, error) {
