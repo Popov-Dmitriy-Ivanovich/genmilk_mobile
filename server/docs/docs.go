@@ -428,6 +428,15 @@ const docTemplate = `{
     "definitions": {
         "load.MeasuresInput": {
             "type": "object",
+            "required": [
+                "additionalInfo",
+                "cow",
+                "downSides",
+                "exterior",
+                "measures",
+                "ratings",
+                "weights"
+            ],
             "properties": {
                 "additionalInfo": {
                     "description": "Доп. информация к измерению",
@@ -489,6 +498,10 @@ const docTemplate = `{
         },
         "models.AdditionalInfo": {
             "type": "object",
+            "required": [
+                "calvingDate",
+                "firstMilkingDate"
+            ],
             "properties": {
                 "additionalProperty1Measure": {
                     "description": "Дополнительный параметр 1 (значение в единицах измерения)",
@@ -532,6 +545,18 @@ const docTemplate = `{
         },
         "models.Cow": {
             "type": "object",
+            "required": [
+                "birthDate",
+                "bloody",
+                "breedName",
+                "holdingInn",
+                "holdingName",
+                "hozName",
+                "inventoryNumber",
+                "name",
+                "rshnnumber",
+                "selecsNumber"
+            ],
             "properties": {
                 "birthDate": {
                     "description": "Дата рождения ГГГГ-ММ-ЧЧ",
@@ -633,6 +658,45 @@ const docTemplate = `{
         },
         "models.Exterior": {
             "type": "object",
+            "required": [
+                "assessmentDate",
+                "backBoneQuality",
+                "backNippleDiameter",
+                "backNippleLocationBackView",
+                "backUdderSegmentsLocationHeight",
+                "backUdderSegmentsWidth",
+                "body",
+                "bodyDepth",
+                "bodyType",
+                "category",
+                "centralLigamentDepth",
+                "chestWidth",
+                "deception",
+                "fatness",
+                "forelegWalk",
+                "frontNippleDiameter",
+                "frontNippleLength",
+                "frontNippleLocationBackView",
+                "frontUdderSegmentsLocation",
+                "harmonyOfMovement",
+                "hindLegWalkBackView",
+                "hindLegWalkSideView",
+                "hoofAngle",
+                "limbs",
+                "milkType",
+                "rating",
+                "ribsAngle",
+                "sacrum",
+                "sacrumAngle",
+                "sacrumHeight",
+                "sacrumLength",
+                "sacrumWidth",
+                "topLine",
+                "udder",
+                "udderBalance",
+                "udderDepth",
+                "udderVeins"
+            ],
             "properties": {
                 "assessmentDate": {
                     "description": "Дата проведения оценочных мероприятий ГГГГ-ММ-ДД",
@@ -640,7 +704,7 @@ const docTemplate = `{
                     "example": "2001-03-23"
                 },
                 "backBoneQuality": {
-                    "description": "качество костяка (9 баллов)",
+                    "description": "Качество костяка (9 баллов)",
                     "type": "number"
                 },
                 "backNippleDiameter": {
@@ -752,7 +816,7 @@ const docTemplate = `{
                     "type": "number"
                 },
                 "sacrumHeight": {
-                    "description": "высота в крестце (9 баллов)",
+                    "description": "Высота в крестце (9 баллов)",
                     "type": "number"
                 },
                 "sacrumLength": {
@@ -760,7 +824,7 @@ const docTemplate = `{
                     "type": "number"
                 },
                 "sacrumWidth": {
-                    "description": "ширина в крестце (9 баллов)",
+                    "description": "Ширина в крестце (9 баллов)",
                     "type": "number"
                 },
                 "topLine": {
@@ -787,6 +851,23 @@ const docTemplate = `{
         },
         "models.Measures": {
             "type": "object",
+            "required": [
+                "backNippleDiameter",
+                "backUdderSegmentsLocationHeight",
+                "backUdderSegmentsWidth",
+                "centralLigamentDepth",
+                "chestWidth",
+                "frontNippleDiameter",
+                "frontNippleLength",
+                "frontUdderSegmentsLocation",
+                "hindLegWalkSideView",
+                "hoofAngle",
+                "sacrumAngle",
+                "sacrumHeight",
+                "sacrumWidth",
+                "udderBalance",
+                "udderDepth"
+            ],
             "properties": {
                 "backNippleDiameter": {
                     "description": "Диаметр задних сосков (Сантиметры или градусы)",
@@ -852,6 +933,18 @@ const docTemplate = `{
         },
         "models.Ratings": {
             "type": "object",
+            "required": [
+                "automaticWithDownsidesBody",
+                "automaticWithDownsidesLimbs",
+                "automaticWithDownsidesMilkType",
+                "automaticWithDownsidesSacrum",
+                "automaticWithDownsidesUdder",
+                "automaticWithoutDownsidesBody",
+                "automaticWithoutDownsidesLimbs",
+                "automaticWithoutDownsidesMilkType",
+                "automaticWithoutDownsidesSacrum",
+                "automaticWithoutDownsidesUdder"
+            ],
             "properties": {
                 "automaticWithDownsidesBody": {
                     "description": "Туловище (100 баллов) рассчитанный автоматически с учетом недостатков",
@@ -937,6 +1030,42 @@ const docTemplate = `{
         },
         "models.Weights": {
             "type": "object",
+            "required": [
+                "automaticBody",
+                "automaticLimbs",
+                "automaticMilkType",
+                "automaticSacrum",
+                "automaticUdder",
+                "backBoneQuality",
+                "backNippleDiameter",
+                "backNippleLocationBackView",
+                "backUdderSegmentsLocationHeight",
+                "backUdderSegmentsWidth",
+                "bodyDepth",
+                "bodyType",
+                "centralLigamentDepth",
+                "chestWidth",
+                "deception",
+                "fatness",
+                "forelegWalk",
+                "frontNippleDiameter",
+                "frontNippleLength",
+                "frontNippleLocationBackView",
+                "frontUdderSegmentsLocation",
+                "harmonyOfMovement",
+                "hindLegWalkBackView",
+                "hindLegWalkSideView",
+                "hoofAngle",
+                "ribsAngle",
+                "sacrumAngle",
+                "sacrumHeight",
+                "sacrumLength",
+                "sacrumWidth",
+                "topLine",
+                "udderBalance",
+                "udderDepth",
+                "udderVeins"
+            ],
             "properties": {
                 "automaticBody": {
                     "description": "Туловище. Вес по методике",
@@ -1098,6 +1227,10 @@ const docTemplate = `{
         },
         "user.ChangePasswordRequest": {
             "type": "object",
+            "required": [
+                "email",
+                "password"
+            ],
             "properties": {
                 "email": {
                     "description": "Почта",
@@ -1113,6 +1246,10 @@ const docTemplate = `{
         },
         "user.ConfirmMailRequest": {
             "type": "object",
+            "required": [
+                "code",
+                "userData"
+            ],
             "properties": {
                 "code": {
                     "description": "Код с эл. почты пользователя",
@@ -1128,6 +1265,10 @@ const docTemplate = `{
         },
         "user.ConfirmPasswordRequest": {
             "type": "object",
+            "required": [
+                "code",
+                "userData"
+            ],
             "properties": {
                 "code": {
                     "description": "Код с эл. почты пользователя",
@@ -1143,6 +1284,10 @@ const docTemplate = `{
         },
         "user.LoginData": {
             "type": "object",
+            "required": [
+                "email",
+                "password"
+            ],
             "properties": {
                 "email": {
                     "description": "Почта пользователя",

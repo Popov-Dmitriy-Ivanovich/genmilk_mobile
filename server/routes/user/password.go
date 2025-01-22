@@ -14,8 +14,8 @@ import (
 )
 
 type ChangePasswordRequest struct {
-	Email    string `example:"FedorsMail@gmail.com"` // Почта
-	Password string `example:"FedorsPassword15"`     // Пароль
+	Email    string `example:"FedorsMail@gmail.com" binding:"required"` // Почта
+	Password string `example:"FedorsPassword15" binding:"required"`     // Пароль
 }
 
 type ChangePasswordUserData struct {
@@ -81,8 +81,8 @@ func (u User) ChangePassword() gin.HandlerFunc {
 }
 
 type ConfirmPasswordRequest struct {
-	UserData string `json:"userData" example:"12308mjkfa01jkfa_!@#"` // Зашифрованные данные пользователя из Register
-	Code     string `example:"3295"`                                 // Код с эл. почты пользователя
+	UserData string `json:"userData" example:"12308mjkfa01jkfa_!@#" binding:"required"` // Зашифрованные данные пользователя из Register
+	Code     string `example:"3295" binding:"required"`                                 // Код с эл. почты пользователя
 }
 
 // ConfirmPassword

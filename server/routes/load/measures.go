@@ -7,13 +7,13 @@ import (
 )
 
 type MeasuresInput struct {
-	Cow            models.Cow            // Загружаемая корова
-	Exterior       models.Exterior       // Экстерьер коровы
-	Measures       models.Measures       // Замеры коровы
-	DownSides      models.DownSides      // Недостатки
-	Ratings        models.Ratings        // Оценки экстерьера
-	AdditionalInfo models.AdditionalInfo // Доп. информация к измерению
-	Weights        models.Weights        // Веса использованные в расчете
+	Cow            models.Cow            `binding:"required"` // Загружаемая корова
+	Exterior       models.Exterior       `binding:"required"` // Экстерьер коровы
+	Measures       models.Measures       `binding:"required"` // Замеры коровы
+	DownSides      *models.DownSides     `binding:"required"` // Недостатки
+	Ratings        models.Ratings        `binding:"required"` // Оценки экстерьера
+	AdditionalInfo models.AdditionalInfo `binding:"required"` // Доп. информация к измерению
+	Weights        models.Weights        `binding:"required"` // Веса использованные в расчете
 }
 
 type Load struct{}

@@ -7,8 +7,8 @@ import (
 )
 
 type LoginData struct {
-	Email    string `example:"user@mail.ru"`      // Почта пользователя
-	Password string `example:"samplePassword123"` // Пароль пользователя
+	Email    string `example:"user@mail.ru" binding:"required"`      // Почта пользователя
+	Password string `example:"samplePassword123" binding:"required"` // Пароль пользователя
 }
 
 // Login

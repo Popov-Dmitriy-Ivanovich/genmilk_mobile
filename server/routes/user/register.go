@@ -89,8 +89,8 @@ func (u User) Register() gin.HandlerFunc {
 }
 
 type ConfirmMailRequest struct {
-	UserData string `json:"userData" example:"12308mjkfa01jkfa_!@#"` // Зашифрованные данные пользователя из Register
-	Code     string `example:"3295"`                                 // Код с эл. почты пользователя
+	UserData string `json:"userData" example:"12308mjkfa01jkfa_!@#" binding:"required"` // Зашифрованные данные пользователя из Register
+	Code     string `example:"3295" binding:"required"`                                 // Код с эл. почты пользователя
 }
 
 // ConfirmMail
