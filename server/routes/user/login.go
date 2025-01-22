@@ -4,7 +4,6 @@ import (
 	"cow_backend_mobile/models"
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
-	"reflect"
 )
 
 type LoginData struct {
@@ -46,9 +45,8 @@ func (u User) Login() gin.HandlerFunc {
 			return
 		}
 
-		if !reflect.DeepEqual(user.Password, hashedPassword) {
-			c.JSON(401, gin.H{"error": "Пароль неверный"})
-			return
+		if err := bcrypt.CompareHashAndPassword(hashedPassword, []byte(loginData.Password)); err != nil {
+			c.JSON(401, gin.H{"error": "Пароли не совпадают", "message": err.Error()})
 		}
 
 		access, refresh, err := GenerateTokens(user.ID)
