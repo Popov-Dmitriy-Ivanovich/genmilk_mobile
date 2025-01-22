@@ -85,17 +85,16 @@ services:
         - 8080:8080
       volumes:
         - backend-static-data:/build/static
-  # nginx:
-  #   container_name: nginx1
-  #   depends_on:
-  #     - cow_mobile_backend
-  #   build: frontend
-  #   ports:
-  #     - 80:80
-  #     - 443:443
-  #   networks:
-  #     - cow_mobile_backend
-
+  nginx:
+    container_name: nginx1
+    depends_on:
+      - cow_mobile_backend
+    build: frontend
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - cow_mobile_backend
 volumes:
   habrdb-data:
   pgadmin-data:
