@@ -2,6 +2,10 @@ package user
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt/v4"
+	"net/http"
+	"os"
+	"strings"
 )
 
 type RefreshRequest struct {
@@ -26,9 +30,28 @@ func (u User) Refresh() gin.HandlerFunc {
 		if err := c.ShouldBind(&RefreshRequest{}); err != nil {
 			c.JSON(422, gin.H{"error": err.Error()})
 		}
+
+		tokenString := strings.TrimPrefix(c.GetHeader("Authorization"), "Bearer ")
+		tokenString = strings.TrimPrefix(tokenString, "bearer ")
+		authClaims := &RefreshTokenClaims{}
+		jwtToken, err := jwt.ParseWithClaims(tokenString, authClaims, func(token *jwt.Token) (interface{}, error) {
+			return []byte(os.Getenv("JWT_KEY")), nil
+		})
+		if err != nil || !jwtToken.Valid {
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "invalid token"})
+			c.Abort()
+			return
+		}
+
+		access, refresh, err := GenerateTokens(authClaims.UserID)
+		if err != nil {
+			c.JSON(500, gin.H{"error": err.Error()})
+			return
+		}
+
 		c.JSON(200, gin.H{
-			"access":  "FKLADFJJl98jfkald",
-			"refresh": "aklfdjadfkslj*(&aj*f8342",
+			"access":  access,
+			"refresh": refresh,
 		})
 	}
 }
