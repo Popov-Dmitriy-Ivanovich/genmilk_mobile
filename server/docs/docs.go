@@ -1158,6 +1158,9 @@ const docTemplate = `{
         },
         "user.RefreshRequest": {
             "type": "object",
+            "required": [
+                "refreshToken"
+            ],
             "properties": {
                 "refreshToken": {
                     "description": "refresh токен",
@@ -1209,7 +1212,7 @@ const docTemplate = `{
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
 	Version:          "1.0",
-	Host:             "77.221.145.143:8080",
+	Host:             "83.69.248.226:8080",
 	BasePath:         "/api/mobile",
 	Schemes:          []string{},
 	Title:            "GenMilk mobile API",

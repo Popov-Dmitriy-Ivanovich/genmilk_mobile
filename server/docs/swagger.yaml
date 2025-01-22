@@ -539,6 +539,8 @@ definitions:
         description: refresh токен
         example: queuefjad1908)fd_?1
         type: string
+    required:
+    - refreshToken
     type: object
   user.RegisterRequest:
     properties:
@@ -564,7 +566,7 @@ definitions:
 externalDocs:
   description: OpenAPI
   url: https://swagger.io/resources/open-api/
-host: 77.221.145.143:8080
+host: 83.69.248.226:8080
 info:
   contact:
     email: support@swagger.io

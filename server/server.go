@@ -30,7 +30,7 @@ import (
 // @license.name  Apache 2.0
 // @license.url   http://www.apache.org/licenses/LICENSE-2.0.html
 
-// @host      77.221.145.143:8080
+// @host      83.69.248.226:8080
 // @BasePath  /api/mobile
 
 // @securityDefinitions.basic  BasicAuth
