@@ -14,16 +14,16 @@ type BaseToken struct {
 	UserID uint
 }
 
-type AccessToken struct {
+type AccessTokenClaims struct {
 	BaseToken
 }
 
-type RefreshToken struct {
+type RefreshTokenClaims struct {
 	BaseToken
 }
 
 func GenerateTokens(UserID uint) (string, string, error) {
-	accessTokenClaims := AccessToken{
+	accessTokenClaims := AccessTokenClaims{
 		BaseToken: BaseToken{
 			UserID: UserID,
 			RegisteredClaims: jwt.RegisteredClaims{
@@ -31,7 +31,7 @@ func GenerateTokens(UserID uint) (string, string, error) {
 			},
 		},
 	}
-	refreshTokenClaims := RefreshToken{
+	refreshTokenClaims := RefreshTokenClaims{
 		BaseToken: BaseToken{
 			UserID: UserID,
 			RegisteredClaims: jwt.RegisteredClaims{

@@ -2,6 +2,7 @@ package load
 
 import (
 	"cow_backend_mobile/models"
+	"cow_backend_mobile/routes/middleware"
 	"github.com/gin-gonic/gin"
 )
 
@@ -19,11 +20,13 @@ type Load struct{}
 
 func (l Load) WriteRoutes(rg *gin.RouterGroup) {
 	apiGroup := rg.Group("/load")
+	apiGroup.Use(middleware.AuthMiddleware(middleware.AuthConfig{}))
 	apiGroup.POST("/measuredData", l.LoadMeasuredData())
 }
 
 // LoadMeasuredData
 // @Summary      Рут загрузки данных измерения коровы
+// @Description  Требует авторизации!
 // @Description  Принимает данные оценки, парсит, создает запись в БД.
 // @Description  В случае успеха возвращает словарь с ключем "status" и значением "ok".
 // @Description  В случае ошибки возвращает словарь с ключем "error" и строкой ошибки.
