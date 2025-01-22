@@ -33,7 +33,6 @@ definitions:
     required:
     - additionalInfo
     - cow
-    - downSides
     - exterior
     - measures
     - ratings

@@ -10,7 +10,7 @@ type MeasuresInput struct {
 	Cow            models.Cow            `binding:"required"` // Загружаемая корова
 	Exterior       models.Exterior       `binding:"required"` // Экстерьер коровы
 	Measures       models.Measures       `binding:"required"` // Замеры коровы
-	DownSides      *models.DownSides     `binding:"required"` // Недостатки
+	DownSides      *models.DownSides     // Недостатки
 	Ratings        models.Ratings        `binding:"required"` // Оценки экстерьера
 	AdditionalInfo models.AdditionalInfo `binding:"required"` // Доп. информация к измерению
 	Weights        models.Weights        `binding:"required"` // Веса использованные в расчете

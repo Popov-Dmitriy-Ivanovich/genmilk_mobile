@@ -431,7 +431,6 @@ const docTemplate = `{
             "required": [
                 "additionalInfo",
                 "cow",
-                "downSides",
                 "exterior",
                 "measures",
                 "ratings",
