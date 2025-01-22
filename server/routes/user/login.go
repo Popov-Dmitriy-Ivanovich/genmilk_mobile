@@ -39,13 +39,8 @@ func (u User) Login() gin.HandlerFunc {
 			c.JSON(404, gin.H{"error": "Пользователь с таким email не найден"})
 			return
 		}
-		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(loginData.Password), bcrypt.DefaultCost)
-		if err != nil {
-			c.JSON(500, gin.H{"error": "Ошибка при хешировании пароля"})
-			return
-		}
 
-		if err := bcrypt.CompareHashAndPassword(hashedPassword, []byte(loginData.Password)); err != nil {
+		if err := bcrypt.CompareHashAndPassword(user.Password, []byte(loginData.Password)); err != nil {
 			c.JSON(401, gin.H{"error": "Пароли не совпадают", "message": err.Error()})
 			return
 		}
