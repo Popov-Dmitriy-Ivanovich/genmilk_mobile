@@ -98,12 +98,16 @@ type ConfirmMailRequest struct {
 // @Description  Подтверждение почты пользователя. После подтверждения пользователь становится зарегистрированным
 // @Description  В случае успеха возвращает словарь с ключем "status" и значением "ok"
 // @Description  В случае ошибки возвращает словарь с ключем "error" и строкой ошибки
+// @Description  Код 406 - неверный код подтверждения
+// @Description  Код 409 - пользователь с таким email уже существует
 // @Param        confirmationData    body     ConfirmMailRequest true  "Данные для подтверждения"
 // @Tags         Register
 // @Produce      json
 // @Success      200  {object}   map[string]string
 // @Failure      500  {object}   map[string]string
 // @Failure      422  {object}   map[string]string
+// @Failure      406  {object}   map[string]string
+// @Failure      409  {object}   map[string]string
 // @Router       /user/confirmMail [post]
 func (u User) ConfirmMail() gin.HandlerFunc {
 	return func(c *gin.Context) {
@@ -129,6 +133,16 @@ func (u User) ConfirmMail() gin.HandlerFunc {
 		hashedPassword, err := bcrypt.GenerateFromPassword([]byte(regData.Password), bcrypt.DefaultCost)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": "Ошибка при хешировании пароля"})
+			return
+		}
+
+		searchRes := db.Where("email = ?", regData.Email).Limit(1).Find(&newUser)
+		if searchRes.Error != nil {
+			c.JSON(500, gin.H{"error": searchRes.Error.Error()})
+			return
+		}
+		if searchRes.RowsAffected != 0 {
+			c.JSON(409, gin.H{"error": "Пользователь с таким email уже существует"})
 			return
 		}
 
