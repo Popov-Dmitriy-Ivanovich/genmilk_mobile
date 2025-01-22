@@ -36,13 +36,16 @@ type Exterior struct {
 	ID    uint `gorm:"primaryKey" json:"-"`
 	CowID uint `json:"-"`
 
+	UserID uint `json:"-" gorm:"index"`
+	User   User `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;" json:"-"`
+
 	AssessmentDate DateOnly       `json:",string" example:"2001-03-23" swaggertype:"string"` // Дата проведения оценочных мероприятий ГГГГ-ММ-ДД
 	Measures       Measures       `json:"-"`
 	DownSides      DownSides      `json:"-"`
 	Ratings        Ratings        `json:"-"`
 	AdditionalInfo AdditionalInfo `json:"-"`
 	Weights        Weights        `json:"-"`
-	
+
 	Rating   float64 // Суммарный рейтинг (100 баллов)
 	Category string  // Категория (хорошо, плохо и т.д.) ХЗ зачем это надо, но мало ли в разных хозяйствах категории разные
 
