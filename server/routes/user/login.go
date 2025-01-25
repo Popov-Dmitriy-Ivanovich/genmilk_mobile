@@ -17,6 +17,7 @@ type LoginData struct {
 // @Description  Рут логина
 // @Description  В случае успеха возвращает словарь с ключем "access" и значением access токена и ключем "refresh" и значение refresh токена
 // @Description  В случае ошибки возвращает словарь с ключем "error" и строкой ошибки
+// @Description  Также в случае успеха по ключу "user" доступны пользовательские данные
 // @Description  В случае если пользователь не найден 404
 // @Param        loginData    body     LoginData true  "Почта и пароль"
 // @Tags         Login
@@ -54,6 +55,7 @@ func (u User) Login() gin.HandlerFunc {
 		c.JSON(200, gin.H{
 			"access":  access,
 			"refresh": refresh,
+			"user":    user,
 		})
 	}
 }
