@@ -69,9 +69,6 @@ definitions:
       lactationNumber:
         description: Номер лактации (целое, беззнаковое число)
         type: integer
-    required:
-    - calvingDate
-    - firstMilkingDate
     type: object
   models.Cow:
     properties:
@@ -82,6 +79,8 @@ definitions:
       bloody:
         description: Кровность
         example: 1
+        maximum: 10000
+        minimum: -10000
         type: number
       breedName:
         description: Название породы
@@ -113,15 +112,11 @@ definitions:
         example: 98989
         type: integer
     required:
-    - birthDate
-    - bloody
     - breedName
     - holdingInn
     - holdingName
     - hozName
     - inventoryNumber
-    - name
-    - rshnnumber
     - selecsNumber
     type: object
   models.DownSides:
@@ -168,27 +163,43 @@ definitions:
         type: string
       backBoneQuality:
         description: Качество костяка (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       backNippleDiameter:
         description: Диаметр задних сосков (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       backNippleLocationBackView:
         description: Расположение задних сосков вид сзади (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       backUdderSegmentsLocationHeight:
         description: Высота прикрепления задних долей вымени (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       backUdderSegmentsWidth:
         description: Ширина задних долей вымени (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       body:
         description: Туловище (100 баллов)
+        maximum: 100
+        minimum: -100
         type: number
       bodyDepth:
         description: Глубина туловища (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       bodyType:
         description: Тип телосложения (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       category:
         description: Категория (хорошо, плохо и т.д.) ХЗ зачем это надо, но мало ли
@@ -196,123 +207,139 @@ definitions:
         type: string
       centralLigamentDepth:
         description: Глубина центральной связки (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       chestWidth:
         description: Ширина груди (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       deception:
         description: Обмускульность (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       fatness:
         description: Упитанность (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       forelegWalk:
         description: Поступь передних ног (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       frontNippleDiameter:
         description: Диаметр передних сосков (9 балов)
+        maximum: 9
+        minimum: -9
         type: number
       frontNippleLength:
         description: Длинна передних сосков (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       frontNippleLocationBackView:
         description: Расположение передних сосков вид сзади (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       frontUdderSegmentsLocation:
         description: Прикрепление передних долей вымени (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       harmonyOfMovement:
         description: Гармоничность движения (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       hindLegWalkBackView:
         description: Поступь задних ног вид cзади (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       hindLegWalkSideView:
         description: Поступь задних ног вид сбоку (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       hoofAngle:
         description: Угол копыта (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       limbs:
         description: Конечности (100 баллов)
+        maximum: 100
+        minimum: -100
         type: number
       milkType:
         description: Молочный тип (100 баллов)
+        maximum: 100
+        minimum: -100
         type: number
       rating:
         description: Суммарный рейтинг (100 баллов)
+        maximum: 100
+        minimum: -100
         type: number
       ribsAngle:
         description: Угол наклона ребер (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       sacrum:
         description: Крестец (100 баллов)
+        maximum: 100
+        minimum: -100
         type: number
       sacrumAngle:
         description: Угол наклона крестца (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       sacrumHeight:
         description: Высота в крестце (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       sacrumLength:
         description: Длина крестца (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       sacrumWidth:
         description: Ширина в крестце (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       topLine:
         description: Линия верха (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       udder:
         description: Вымя (100 баллов)
+        maximum: 100
+        minimum: -100
         type: number
       udderBalance:
         description: Баланс вымени (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       udderDepth:
         description: Глубина вымени (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       udderVeins:
         description: Выраженность вен вымени (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
-    required:
-    - assessmentDate
-    - backBoneQuality
-    - backNippleDiameter
-    - backNippleLocationBackView
-    - backUdderSegmentsLocationHeight
-    - backUdderSegmentsWidth
-    - body
-    - bodyDepth
-    - bodyType
-    - category
-    - centralLigamentDepth
-    - chestWidth
-    - deception
-    - fatness
-    - forelegWalk
-    - frontNippleDiameter
-    - frontNippleLength
-    - frontNippleLocationBackView
-    - frontUdderSegmentsLocation
-    - harmonyOfMovement
-    - hindLegWalkBackView
-    - hindLegWalkSideView
-    - hoofAngle
-    - limbs
-    - milkType
-    - rating
-    - ribsAngle
-    - sacrum
-    - sacrumAngle
-    - sacrumHeight
-    - sacrumLength
-    - sacrumWidth
-    - topLine
-    - udder
-    - udderBalance
-    - udderDepth
-    - udderVeins
     type: object
   models.Measures:
     properties:
@@ -361,22 +388,6 @@ definitions:
       udderDepth:
         description: Глубина вымени (Сантиметры или градусы)
         type: number
-    required:
-    - backNippleDiameter
-    - backUdderSegmentsLocationHeight
-    - backUdderSegmentsWidth
-    - centralLigamentDepth
-    - chestWidth
-    - frontNippleDiameter
-    - frontNippleLength
-    - frontUdderSegmentsLocation
-    - hindLegWalkSideView
-    - hoofAngle
-    - sacrumAngle
-    - sacrumHeight
-    - sacrumWidth
-    - udderBalance
-    - udderDepth
     type: object
   models.Ratings:
     properties:
@@ -443,17 +454,6 @@ definitions:
       userDefinedWithoutDownsidesUdder:
         description: Вымя (100 баллов) без учета недостатков, оценка пользователя
         type: number
-    required:
-    - automaticWithDownsidesBody
-    - automaticWithDownsidesLimbs
-    - automaticWithDownsidesMilkType
-    - automaticWithDownsidesSacrum
-    - automaticWithDownsidesUdder
-    - automaticWithoutDownsidesBody
-    - automaticWithoutDownsidesLimbs
-    - automaticWithoutDownsidesMilkType
-    - automaticWithoutDownsidesSacrum
-    - automaticWithoutDownsidesUdder
     type: object
   models.Weights:
     properties:
@@ -574,41 +574,6 @@ definitions:
       userDefinedUdder:
         description: Вымя. Вес, определенный пользователем
         type: number
-    required:
-    - automaticBody
-    - automaticLimbs
-    - automaticMilkType
-    - automaticSacrum
-    - automaticUdder
-    - backBoneQuality
-    - backNippleDiameter
-    - backNippleLocationBackView
-    - backUdderSegmentsLocationHeight
-    - backUdderSegmentsWidth
-    - bodyDepth
-    - bodyType
-    - centralLigamentDepth
-    - chestWidth
-    - deception
-    - fatness
-    - forelegWalk
-    - frontNippleDiameter
-    - frontNippleLength
-    - frontNippleLocationBackView
-    - frontUdderSegmentsLocation
-    - harmonyOfMovement
-    - hindLegWalkBackView
-    - hindLegWalkSideView
-    - hoofAngle
-    - ribsAngle
-    - sacrumAngle
-    - sacrumHeight
-    - sacrumLength
-    - sacrumWidth
-    - topLine
-    - udderBalance
-    - udderDepth
-    - udderVeins
     type: object
   user.ChangePasswordRequest:
     properties:
@@ -620,9 +585,6 @@ definitions:
         description: Пароль
         example: FedorsPassword15
         type: string
-    required:
-    - email
-    - password
     type: object
   user.ConfirmMailRequest:
     properties:
@@ -634,9 +596,6 @@ definitions:
         description: Зашифрованные данные пользователя из Register
         example: 12308mjkfa01jkfa_!@#
         type: string
-    required:
-    - code
-    - userData
     type: object
   user.ConfirmPasswordRequest:
     properties:
@@ -648,9 +607,6 @@ definitions:
         description: Зашифрованные данные пользователя из Register
         example: 12308mjkfa01jkfa_!@#
         type: string
-    required:
-    - code
-    - userData
     type: object
   user.LoginData:
     properties:
@@ -662,9 +618,6 @@ definitions:
         description: Пароль пользователя
         example: samplePassword123
         type: string
-    required:
-    - email
-    - password
     type: object
   user.RefreshRequest:
     properties:
@@ -672,8 +625,6 @@ definitions:
         description: refresh токен
         example: queuefjad1908)fd_?1
         type: string
-    required:
-    - refreshToken
     type: object
   user.RegisterRequest:
     properties:
@@ -691,10 +642,6 @@ definitions:
         description: Пароль
         example: FedorsPassword15
         type: string
-    required:
-    - email
-    - nameSurnamePatronymic
-    - password
     type: object
 externalDocs:
   description: OpenAPI
