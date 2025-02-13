@@ -1,15 +1,16 @@
 package user
 
 import (
-	"github.com/gin-gonic/gin"
-	"github.com/golang-jwt/jwt/v4"
 	"net/http"
 	"os"
 	"strings"
+
+	"github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt/v4"
 )
 
 type RefreshRequest struct {
-	RefreshToken string `example:"queuefjad1908)fd_?1" binding:"required"` // refresh токен
+	RefreshToken string `example:"queuefjad1908)fd_?1" ` // refresh токен
 }
 
 // Refresh

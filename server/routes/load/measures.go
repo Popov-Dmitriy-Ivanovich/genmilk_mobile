@@ -4,16 +4,30 @@ import (
 	"cow_backend_mobile/models"
 	"cow_backend_mobile/routes/middleware"
 	"github.com/gin-gonic/gin"
+	"github.com/go-playground/validator/v10"
 )
 
 type MeasuresInput struct {
-	Cow            models.Cow            `binding:"required"` // Загружаемая корова
-	Exterior       models.Exterior       `binding:"required"` // Экстерьер коровы
-	Measures       models.Measures       `binding:"required"` // Замеры коровы
+	Cow            models.Cow            `validate:"required"` // Загружаемая корова
+	Exterior       models.Exterior       `validate:"required"` // Экстерьер коровы
+	Measures       models.Measures       `validate:"required"` // Замеры коровы
 	DownSides      *models.DownSides     // Недостатки
-	Ratings        models.Ratings        `binding:"required"` // Оценки экстерьера
-	AdditionalInfo models.AdditionalInfo `binding:"required"` // Доп. информация к измерению
-	Weights        models.Weights        `binding:"required"` // Веса использованные в расчете
+	Ratings        models.Ratings        `validate:"required"` // Оценки экстерьера
+	AdditionalInfo models.AdditionalInfo `validate:"required"` // Доп. информация к измерению
+	Weights        models.Weights        `validate:"required"` // Веса использованные в расчете
+}
+
+func (mi MeasuresInput) Validate() error {
+	validate := validator.New(validator.WithRequiredStructEnabled())
+
+	if err := validate.Struct(mi.Cow); err != nil {
+		return err
+	}
+
+	if err := validate.Struct(mi.Exterior); err != nil {
+		return err
+	}
+	return nil
 }
 
 type Load struct{}
@@ -47,6 +61,44 @@ func (l Load) LoadMeasuredData() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		mInput := MeasuresInput{}
 		if err := c.ShouldBindJSON(&mInput); err != nil {
+			c.JSON(422, gin.H{"error": err.Error()})
+			return
+		}
+		if err := mInput.Validate(); err != nil {
+			c.JSON(422, gin.H{"error": err.Error()})
+			return
+		}
+		db := models.GetDatabase()
+		cow := models.Cow{}
+		if err := db.FirstOrCreate(&cow, mInput.Cow).Error; err != nil {
+			c.JSON(422, gin.H{"error": err.Error()})
+			return
+		}
+		val, ok := c.Get("UserID")
+		if !ok {
+			c.JSON(401, gin.H{"error": "No User Found"})
+			return
+		}
+		userId, ok := val.(uint)
+		if !ok {
+			c.JSON(500, gin.H{"error": "UserId has wrong type"})
+			return
+		}
+		user := models.User{}
+		if err := db.First(&user, userId).Error; err != nil {
+			c.JSON(500, gin.H{"error": err.Error()})
+			return
+		}
+		cowExterior := mInput.Exterior
+		cowExterior.User = user
+		cowExterior.Measures = mInput.Measures
+		cowExterior.DownSides = mInput.DownSides
+		cowExterior.Ratings = mInput.Ratings
+		cowExterior.AdditionalInfo = mInput.AdditionalInfo
+		cowExterior.Weights = mInput.Weights
+		cow.Exteriors = append(cow.Exteriors, cowExterior)
+
+		if err := db.Save(&cow).Error; err != nil {
 			c.JSON(422, gin.H{"error": err.Error()})
 			return
 		}

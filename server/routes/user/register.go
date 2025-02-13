@@ -2,9 +2,6 @@ package user
 
 import (
 	"cow_backend_mobile/models"
-	"github.com/gin-gonic/gin"
-	"github.com/golang-jwt/jwt/v4"
-	"golang.org/x/crypto/bcrypt"
 	"log"
 	"math/rand/v2"
 	"net/http"
@@ -12,12 +9,16 @@ import (
 	"os"
 	"strconv"
 	"time"
+
+	"github.com/gin-gonic/gin"
+	"github.com/golang-jwt/jwt/v4"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type RegisterRequest struct {
-	Email                 string `example:"User321@gmail.com" binding:"required"`      // Почта
-	NameSurnamePatronymic string `example:"Иванов Федор Петрович" binding:"required" ` // Фио
-	Password              string `example:"FedorsPassword15" binding:"required"`       // Пароль
+	Email                 string `example:"User321@gmail.com" `      // Почта
+	NameSurnamePatronymic string `example:"Иванов Федор Петрович"  ` // Фио
+	Password              string `example:"FedorsPassword15" `       // Пароль
 	LicenseNumber         *string
 }
 
@@ -89,8 +90,8 @@ func (u User) Register() gin.HandlerFunc {
 }
 
 type ConfirmMailRequest struct {
-	UserData string `json:"userData" example:"12308mjkfa01jkfa_!@#" binding:"required"` // Зашифрованные данные пользователя из Register
-	Code     string `example:"3295" binding:"required"`                                 // Код с эл. почты пользователя
+	UserData string `json:"userData" example:"12308mjkfa01jkfa_!@#" ` // Зашифрованные данные пользователя из Register
+	Code     string `example:"3295" `                                 // Код с эл. почты пользователя
 }
 
 // ConfirmMail

@@ -2,13 +2,14 @@ package user
 
 import (
 	"cow_backend_mobile/models"
+
 	"github.com/gin-gonic/gin"
 	"golang.org/x/crypto/bcrypt"
 )
 
 type LoginData struct {
-	Email    string `example:"user@mail.ru" binding:"required"`      // Почта пользователя
-	Password string `example:"samplePassword123" binding:"required"` // Пароль пользователя
+	Email    string `example:"user@mail.ru" `      // Почта пользователя
+	Password string `example:"samplePassword123" ` // Пароль пользователя
 }
 
 // Login
