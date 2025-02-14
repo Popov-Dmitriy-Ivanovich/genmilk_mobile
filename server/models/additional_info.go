@@ -13,7 +13,7 @@ type AdditionalInfo struct {
 	AdditionalProperty1Measure *string // Дополнительный параметр 1 (значение в единицах измерения)
 	AdditionalProperty2Measure *string // Дополнительный параметр 2 (значение в единицах измерения)
 
-	LactationNumber  uint     // Номер лактации (целое, беззнаковое число)
-	CalvingDate      DateOnly `json:",string" example:"2001-03-23" swaggertype:"string" ` // Дата отела ГГГГ-ММ-ДД
-	FirstMilkingDate DateOnly `json:",string" example:"2001-03-23" swaggertype:"string" ` // Дата первого доения ГГГГ-ММ-ДД
+	LactationNumber  uint      // Номер лактации (целое, беззнаковое число)
+	CalvingDate      DateOnly  `json:",string" example:"2001-03-23" swaggertype:"string" ` // Дата отела ГГГГ-ММ-ДД
+	FirstMilkingDate *DateOnly `json:",string" example:"2001-03-23" swaggertype:"string" ` // Дата первого доения ГГГГ-ММ-ДД
 }
