@@ -31,7 +31,7 @@ type LoginData struct {
 func (u User) Login() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		loginData := LoginData{}
-		if err := c.ShouldBind(&loginData); err != nil {
+		if err := c.ShouldBindJSON(&loginData); err != nil {
 			c.JSON(422, gin.H{"error": err.Error()})
 		}
 		db := models.GetDatabase()

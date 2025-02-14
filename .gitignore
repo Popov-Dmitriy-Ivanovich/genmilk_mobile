@@ -8,3 +8,4 @@ server/static/exterior/*
 server/static/gtc/*
 server/.env
 .idea
+server/test/test.db

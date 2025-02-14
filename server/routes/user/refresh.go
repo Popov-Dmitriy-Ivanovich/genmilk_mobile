@@ -29,7 +29,7 @@ type RefreshRequest struct {
 func (u User) Refresh() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		refreshReq := &RefreshRequest{}
-		if err := c.ShouldBind(refreshReq); err != nil {
+		if err := c.ShouldBindJSON(refreshReq); err != nil {
 			c.JSON(422, gin.H{"error": err.Error()})
 			return
 		}

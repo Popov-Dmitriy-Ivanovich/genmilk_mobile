@@ -43,7 +43,7 @@ type RegisterUserData struct {
 func (u User) Register() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		regReq := RegisterRequest{}
-		if err := c.ShouldBind(&regReq); err != nil {
+		if err := c.ShouldBindJSON(&regReq); err != nil {
 			c.JSON(422, gin.H{"error": err.Error()})
 		}
 
@@ -113,7 +113,7 @@ type ConfirmMailRequest struct {
 func (u User) ConfirmMail() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		confirmReq := ConfirmMailRequest{}
-		if err := c.ShouldBind(&confirmReq); err != nil {
+		if err := c.ShouldBindJSON(&confirmReq); err != nil {
 			c.JSON(422, gin.H{"error": err.Error()})
 			return
 		}

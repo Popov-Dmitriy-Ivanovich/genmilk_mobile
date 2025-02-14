@@ -2,6 +2,7 @@ package models
 
 import (
 	"gorm.io/driver/postgres"
+	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 	"os"
 	"sync"
@@ -51,4 +52,24 @@ func GetDatabase() *gorm.DB {
 		sqlDB.SetMaxOpenConns(10)
 	}
 	return dbConnection
+}
+
+func MockDatabase() {
+	data, err := os.ReadFile("fixture.db")
+	if err != nil {
+		panic(err)
+	}
+	// Write data to dst
+	err = os.WriteFile("test.db", data, 0644)
+	if err != nil {
+		panic(err)
+	}
+	db, err := gorm.Open(sqlite.Open("test.db"), &gorm.Config{})
+	if err != nil {
+		panic(err)
+	}
+	if err := db.AutoMigrate(&Cow{}, &AdditionalInfo{}, &DownSides{}, &Ratings{}, &Exterior{}, &Measures{}, &User{}, &Weights{}); err != nil {
+		panic(err)
+	}
+	dbConnection = db
 }

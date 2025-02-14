@@ -101,7 +101,7 @@ type ConfirmPasswordRequest struct {
 func (u User) ConfirmPassword() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		confirmReq := ConfirmPasswordRequest{}
-		if err := c.ShouldBind(&confirmReq); err != nil {
+		if err := c.ShouldBindJSON(&confirmReq); err != nil {
 			c.JSON(422, gin.H{"error": err.Error()})
 		}
 
