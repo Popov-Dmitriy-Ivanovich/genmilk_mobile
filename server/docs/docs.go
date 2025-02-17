@@ -557,14 +557,16 @@ const docTemplate = `{
                 "bloody": {
                     "description": "Кровность",
                     "type": "number",
-                    "maximum": 10000,
-                    "minimum": -10000,
                     "example": 1
                 },
                 "breedName": {
                     "description": "Название породы",
                     "type": "string",
                     "example": "Порода"
+                },
+                "firstAssessmentDate": {
+                    "type": "string",
+                    "example": "2001-03-23"
                 },
                 "holdingInn": {
                     "description": "ИНН холдинга",
