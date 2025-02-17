@@ -6,9 +6,6 @@ import (
 	"time"
 )
 
-var ACCESS_EXP = time.Now().Add(time.Hour * 24)
-var REFRESH_EXP = time.Now().AddDate(50, 0, 1)
-
 type BaseToken struct {
 	jwt.RegisteredClaims
 	UserID uint
@@ -23,6 +20,9 @@ type RefreshTokenClaims struct {
 }
 
 func GenerateTokens(UserID uint) (string, string, error) {
+	var ACCESS_EXP = time.Now().Add(time.Hour * 24)
+	var REFRESH_EXP = time.Now().AddDate(50, 0, 1)
+
 	accessTokenClaims := AccessTokenClaims{
 		BaseToken: BaseToken{
 			UserID: UserID,
