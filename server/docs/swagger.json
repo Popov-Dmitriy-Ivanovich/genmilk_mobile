@@ -1042,120 +1042,136 @@
                     "description": "Вымя. Вес по методике",
                     "type": "number"
                 },
-                "backBoneQuality": {
-                    "description": "качество костяка",
-                    "type": "number"
-                },
                 "backNippleDiameter": {
-                    "description": "Диаметр задних сосков",
+                    "description": "В Диаметр задних сосков",
                     "type": "number"
                 },
                 "backNippleLocationBackView": {
-                    "description": "Расположение задних сосков вид сзади",
+                    "description": "В Расположение задних сосков вид сзади",
                     "type": "number"
                 },
                 "backUdderSegmentsLocationHeight": {
-                    "description": "Высота прикрепления задних долей вымени",
+                    "description": "В Высота прикрепления задних долей вымени",
                     "type": "number"
                 },
                 "backUdderSegmentsWidth": {
-                    "description": "Ширина задних долей вымени",
+                    "description": "В Ширина задних долей вымени",
                     "type": "number"
                 },
-                "bodyDepth": {
-                    "description": "Глубина туловища",
+                "bodyBodyDepth": {
+                    "description": "Т Глубина туловища",
                     "type": "number"
                 },
-                "bodyType": {
-                    "description": "Тип телосложения",
+                "bodyChestWidth": {
+                    "description": "Т Ширина груди",
+                    "type": "number"
+                },
+                "bodyDeception": {
+                    "description": "Т Обмускульность",
+                    "type": "number"
+                },
+                "bodySacrumHeight": {
+                    "description": "Т высота в крестце",
                     "type": "number"
                 },
                 "centralLigamentDepth": {
-                    "description": "Глубина центральной связки",
-                    "type": "number"
-                },
-                "chestWidth": {
-                    "description": "Ширина груди",
-                    "type": "number"
-                },
-                "deception": {
-                    "description": "Обмускульность",
-                    "type": "number"
-                },
-                "fatness": {
-                    "description": "Упитанность",
-                    "type": "number"
-                },
-                "forelegWalk": {
-                    "description": "Поступь передних ног",
+                    "description": "В Глубина центральной связки",
                     "type": "number"
                 },
                 "frontNippleDiameter": {
-                    "description": "Диаметр передних сосков (9 балов)",
+                    "description": "В Диаметр передних сосков (9 балов)",
                     "type": "number"
                 },
                 "frontNippleLength": {
-                    "description": "Длинна передних сосков",
+                    "description": "В Длинна передних сосков",
                     "type": "number"
                 },
                 "frontNippleLocationBackView": {
-                    "description": "Расположение передних сосков вид сзади",
+                    "description": "В Расположение передних сосков вид сзади",
                     "type": "number"
                 },
                 "frontUdderSegmentsLocation": {
-                    "description": "Прикрепление передних долей вымени",
+                    "description": "В Прикрепление передних долей вымени",
                     "type": "number"
                 },
-                "harmonyOfMovement": {
-                    "description": "Гармоничность движения",
+                "limbsDeception": {
+                    "description": "К Обмускульность",
                     "type": "number"
                 },
-                "hindLegWalkBackView": {
-                    "description": "Поступь задних ног вид cзади",
+                "limbsForelegWalk": {
+                    "description": "К Поступь передних ног",
                     "type": "number"
                 },
-                "hindLegWalkSideView": {
-                    "description": "Поступь задних ног вид сбоку",
+                "limbsHarmonyOfMovement": {
+                    "description": "К Гармоничность движения",
                     "type": "number"
                 },
-                "hoofAngle": {
-                    "description": "Угол копыта",
+                "limbsHindLegWalkBackView": {
+                    "description": "К Поступь задних ног вид cзади",
                     "type": "number"
                 },
-                "ribsAngle": {
-                    "description": "Угол наклона ребер",
+                "limbsHindLegWalkSideView": {
+                    "description": "К Поступь задних ног вид сбоку",
+                    "type": "number"
+                },
+                "limbsHoofAngle": {
+                    "description": "К Угол копыта",
+                    "type": "number"
+                },
+                "milkTypeBackBoneQuality": {
+                    "description": "МТ качество костяка",
+                    "type": "number"
+                },
+                "milkTypeBodyDepth": {
+                    "description": "МТ Глубина туловища",
+                    "type": "number"
+                },
+                "milkTypeBodyType": {
+                    "description": "МТ Тип телосложения",
+                    "type": "number"
+                },
+                "milkTypeChestWidth": {
+                    "description": "МТ Ширина груди",
+                    "type": "number"
+                },
+                "milkTypeFatness": {
+                    "description": "МТ Упитанность",
+                    "type": "number"
+                },
+                "milkTypeRibsAngle": {
+                    "description": "МТ Угол наклона ребер",
+                    "type": "number"
+                },
+                "milkTypeSacrumHeight": {
+                    "description": "МТ высота в крестце",
+                    "type": "number"
+                },
+                "milkTypeTopLine": {
+                    "description": "МТ Линия верха",
                     "type": "number"
                 },
                 "sacrumAngle": {
-                    "description": "Угол наклона крестца",
-                    "type": "number"
-                },
-                "sacrumHeight": {
-                    "description": "высота в крестце",
+                    "description": "Кр Угол наклона крестца",
                     "type": "number"
                 },
                 "sacrumLength": {
-                    "description": "Длина крестца",
+                    "description": "Кр Длина крестца",
                     "type": "number"
                 },
                 "sacrumWidth": {
-                    "description": "ширина в крестце",
-                    "type": "number"
-                },
-                "topLine": {
-                    "description": "Линия верха",
+                    "description": "Кр ширина в крестце",
                     "type": "number"
                 },
                 "udderBalance": {
-                    "description": "Баланс вымени",
+                    "description": "В Баланс вымени",
                     "type": "number"
                 },
                 "udderDepth": {
-                    "description": "Глубина вымени",
+                    "description": "В Глубина вымени",
                     "type": "number"
                 },
                 "udderVeins": {
-                    "description": "Выраженность вен вымени",
+                    "description": "В Выраженность вен вымени",
                     "type": "number"
                 },
                 "userDefinedBody": {
