@@ -54,15 +54,15 @@ func (c Cows) GetConcrete() gin.HandlerFunc {
 		cow_id := c.Param("id")
 		cow := models.Cow{}
 		db := models.GetDatabase()
-		if err := db.
-			Preload("Exteriors").
-			Preload("Exteriors.User").
-			Preload("Exteriors.Measures").
-			Preload("Exteriors.DownSides").
-			Preload("Exteriors.Ratings").
-			Preload("Exteriors.AdditionalInfo").
-			Preload("Exteriors.Weights").
-			First(&cow, cow_id).Error; err != nil {
+		if err := db.Debug().
+			//Preload("Exteriors").
+			//Preload("Exteriors.User").
+			//Preload("Exteriors.Measures").
+			//Preload("Exteriors.DownSides").
+			//Preload("Exteriors.Ratings").
+			//Preload("Exteriors.AdditionalInfo").
+			//Preload("Exteriors.Weights").
+			First(&cow, map[string]any{"id":cow_id}).Error; err != nil {
 			c.AbortWithError(404, err)
 			return
 		}
