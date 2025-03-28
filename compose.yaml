@@ -91,8 +91,8 @@ services:
       - cow_mobile_backend
     build: frontend
     ports:
-      - 80:80
-      - 443:443
+      - 8880:80
+      - 8443:443
     networks:
       - cow_mobile_backend
 volumes:
