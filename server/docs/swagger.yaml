@@ -84,6 +84,11 @@ definitions:
         description: Название породы
         example: Порода
         type: string
+      exteriors:
+        description: Оценки экстерьера
+        items:
+          $ref: '#/definitions/models.Exterior'
+        type: array
       firstAssessmentDate:
         example: "2001-03-23"
         type: string
@@ -158,6 +163,8 @@ definitions:
     type: object
   models.Exterior:
     properties:
+      additionalInfo:
+        $ref: '#/definitions/models.AdditionalInfo'
       assessmentDate:
         description: Дата проведения оценочных мероприятий ГГГГ-ММ-ДД
         example: "2001-03-23"
@@ -221,6 +228,8 @@ definitions:
         maximum: 9
         minimum: -9
         type: number
+      downSides:
+        $ref: '#/definitions/models.DownSides'
       fatness:
         description: Упитанность (9 баллов)
         maximum: 9
@@ -276,6 +285,8 @@ definitions:
         maximum: 100
         minimum: -100
         type: number
+      measures:
+        $ref: '#/definitions/models.Measures'
       milkType:
         description: Молочный тип (100 баллов)
         maximum: 100
@@ -286,6 +297,8 @@ definitions:
         maximum: 100
         minimum: -100
         type: number
+      ratings:
+        $ref: '#/definitions/models.Ratings'
       ribsAngle:
         description: Угол наклона ребер (9 баллов)
         maximum: 9
@@ -341,6 +354,8 @@ definitions:
         maximum: 9
         minimum: -9
         type: number
+      weights:
+        $ref: '#/definitions/models.Weights'
     type: object
   models.Measures:
     properties:
@@ -678,6 +693,76 @@ info:
   title: GenMilk mobile API
   version: "1.0"
 paths:
+  /cows:
+    get:
+      description: Возвращает массив id всех коров, внесенных в базу данных
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              type: integer
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Рут получения списка id коров
+      tags:
+      - Cows
+  /cows/{id}:
+    get:
+      description: Возвращает массив id всех коров, внесенных в базу данных
+      parameters:
+      - description: Данные измерения коровы
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Cow'
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "422":
+          description: Unprocessable Entity
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Рут получения списка id коров
+      tags:
+      - Cows
   /load/measuredData:
     post:
       description: |-

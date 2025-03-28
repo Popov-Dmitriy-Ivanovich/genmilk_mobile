@@ -24,6 +24,112 @@ const docTemplate = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
+        "/cows": {
+            "get": {
+                "description": "Возвращает массив id всех коров, внесенных в базу данных",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Cows"
+                ],
+                "summary": "Рут получения списка id коров",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/cows/{id}": {
+            "get": {
+                "description": "Возвращает массив id всех коров, внесенных в базу данных",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Cows"
+                ],
+                "summary": "Рут получения списка id коров",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Данные измерения коровы",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/models.Cow"
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Unprocessable Entity",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/load/measuredData": {
             "post": {
                 "description": "Требует авторизации!\nПринимает данные оценки, парсит, создает запись в БД.\nВ случае успеха возвращает словарь с ключем \"status\" и значением \"ok\".\nВ случае ошибки возвращает словарь с ключем \"error\" и строкой ошибки.\nВ этом проекте предлагается хранить 4 группы 100-бальных оценок (с/без недостатками + авто/пользовательские).\nВ genmilk.ru хранится только одна группа 100-бальных признаков, поля MilkType, Body, Limbs ...\nв экстерьере означают те 100-бальные оценки, которые будут в базе genmilk.ru.\nРазделитель для строк, содержащих недостатки выбран из соображения о том, что URL работает с\nразделителем \"/\", других причин для выбора \"/\" нет, можно перевыбрать, это совершенно не принципиально",
@@ -564,6 +670,13 @@ const docTemplate = `{
                     "type": "string",
                     "example": "Порода"
                 },
+                "exteriors": {
+                    "description": "Оценки экстерьера",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/models.Exterior"
+                    }
+                },
                 "firstAssessmentDate": {
                     "type": "string",
                     "example": "2001-03-23"
@@ -654,6 +767,9 @@ const docTemplate = `{
         "models.Exterior": {
             "type": "object",
             "properties": {
+                "additionalInfo": {
+                    "$ref": "#/definitions/models.AdditionalInfo"
+                },
                 "assessmentDate": {
                     "description": "Дата проведения оценочных мероприятий ГГГГ-ММ-ДД",
                     "type": "string",
@@ -729,6 +845,9 @@ const docTemplate = `{
                     "maximum": 9,
                     "minimum": -9
                 },
+                "downSides": {
+                    "$ref": "#/definitions/models.DownSides"
+                },
                 "fatness": {
                     "description": "Упитанность (9 баллов)",
                     "type": "number",
@@ -795,6 +914,9 @@ const docTemplate = `{
                     "maximum": 100,
                     "minimum": -100
                 },
+                "measures": {
+                    "$ref": "#/definitions/models.Measures"
+                },
                 "milkType": {
                     "description": "Молочный тип (100 баллов)",
                     "type": "number",
@@ -806,6 +928,9 @@ const docTemplate = `{
                     "type": "number",
                     "maximum": 100,
                     "minimum": -100
+                },
+                "ratings": {
+                    "$ref": "#/definitions/models.Ratings"
                 },
                 "ribsAngle": {
                     "description": "Угол наклона ребер (9 баллов)",
@@ -872,6 +997,9 @@ const docTemplate = `{
                     "type": "number",
                     "maximum": 9,
                     "minimum": -9
+                },
+                "weights": {
+                    "$ref": "#/definitions/models.Weights"
                 }
             }
         },

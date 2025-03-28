@@ -13,6 +13,6 @@ type Cow struct {
 	HoldingName         string     `validate:"required"`                                       // Название холдинга
 	HoldingInn          string     `validate:"required"`                                       // ИНН холдинга
 	HozName             string     `validate:"required"`                                       // Название хозяйства
-	Exteriors           []Exterior `json:"-"`                                                  // Оценки экстерьера
+	Exteriors           []Exterior // Оценки экстерьера
 	FirstAssessmentDate *DateOnly  `example:"2001-03-23" swaggertype:"string"`
 }

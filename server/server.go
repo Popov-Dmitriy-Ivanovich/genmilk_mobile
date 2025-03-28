@@ -4,14 +4,16 @@ import (
 	_ "cow_backend_mobile/docs"
 	"cow_backend_mobile/models"
 	"cow_backend_mobile/routes"
+	"cow_backend_mobile/routes/cows"
 	"cow_backend_mobile/routes/load"
 	"cow_backend_mobile/routes/user"
+	"time"
+
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"
-	"time"
 )
 
 // @title           GenMilk mobile API
@@ -61,7 +63,7 @@ func main() {
 	}))
 
 	apiGroup := r.Group("/api/mobile")
-	routes.WriteRoutes(apiGroup, &load.Load{}, &user.User{})
+	routes.WriteRoutes(apiGroup, &load.Load{}, &user.User{}, &cows.Cows{})
 	models.GetDatabase()
 	apiGroup.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	//apiGroup.Static("/static", "static")
