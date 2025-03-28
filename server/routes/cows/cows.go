@@ -13,7 +13,7 @@ func (c Cows) WriteRoutes(rg *gin.RouterGroup) {
 	apiGroup := rg.Group("/cows")
 	apiGroup.Use(middleware.AuthMiddleware(middleware.AuthConfig{}))
 	apiGroup.GET("/cows", c.Get())
-	apiGroup.GET("/cows/:id")
+	apiGroup.GET("/cows/:id", c.GetConcrete())
 }
 
 // Get
@@ -55,14 +55,14 @@ func (c Cows) GetConcrete() gin.HandlerFunc {
 		cow := models.Cow{}
 		db := models.GetDatabase()
 		if err := db.Debug().
-			//Preload("Exteriors").
-			//Preload("Exteriors.User").
-			//Preload("Exteriors.Measures").
-			//Preload("Exteriors.DownSides").
-			//Preload("Exteriors.Ratings").
-			//Preload("Exteriors.AdditionalInfo").
-			//Preload("Exteriors.Weights").
-			First(&cow, map[string]any{"id":cow_id}).Error; err != nil {
+			Preload("Exteriors").
+			Preload("Exteriors.User").
+			Preload("Exteriors.Measures").
+			Preload("Exteriors.DownSides").
+			Preload("Exteriors.Ratings").
+			Preload("Exteriors.AdditionalInfo").
+			Preload("Exteriors.Weights").
+			First(&cow, map[string]any{"id": cow_id}).Error; err != nil {
 			c.AbortWithError(404, err)
 			return
 		}
