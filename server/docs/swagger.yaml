@@ -223,11 +223,6 @@ definitions:
         maximum: 9
         minimum: -9
         type: number
-      deception:
-        description: Обмускульность (9 баллов)
-        maximum: 9
-        minimum: -9
-        type: number
       downSides:
         $ref: '#/definitions/models.DownSides'
       fatness:
@@ -291,6 +286,11 @@ definitions:
         description: Молочный тип (100 баллов)
         maximum: 100
         minimum: -100
+        type: number
+      muscularity:
+        description: Обмускульность (9 баллов)
+        maximum: 9
+        minimum: -9
         type: number
       rating:
         description: Суммарный рейтинг (100 баллов)
@@ -506,7 +506,7 @@ definitions:
       bodyChestWidth:
         description: Т Ширина груди
         type: number
-      bodyDeception:
+      bodyMuscularity:
         description: Т Обмускульность
         type: number
       bodySacrumHeight:
@@ -527,9 +527,6 @@ definitions:
       frontUdderSegmentsLocation:
         description: В Прикрепление передних долей вымени
         type: number
-      limbsDeception:
-        description: К Обмускульность
-        type: number
       limbsForelegWalk:
         description: К Поступь передних ног
         type: number
@@ -544,6 +541,9 @@ definitions:
         type: number
       limbsHoofAngle:
         description: К Угол копыта
+        type: number
+      limbsMuscularity:
+        description: К Обмускульность
         type: number
       milkTypeBackBoneQuality:
         description: МТ качество костяка

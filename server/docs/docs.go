@@ -839,12 +839,6 @@ const docTemplate = `{
                     "maximum": 9,
                     "minimum": -9
                 },
-                "deception": {
-                    "description": "Обмускульность (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
-                },
                 "downSides": {
                     "$ref": "#/definitions/models.DownSides"
                 },
@@ -922,6 +916,12 @@ const docTemplate = `{
                     "type": "number",
                     "maximum": 100,
                     "minimum": -100
+                },
+                "muscularity": {
+                    "description": "Обмускульность (9 баллов)",
+                    "type": "number",
+                    "maximum": 9,
+                    "minimum": -9
                 },
                 "rating": {
                     "description": "Суммарный рейтинг (100 баллов)",
@@ -1200,7 +1200,7 @@ const docTemplate = `{
                     "description": "Т Ширина груди",
                     "type": "number"
                 },
-                "bodyDeception": {
+                "bodyMuscularity": {
                     "description": "Т Обмускульность",
                     "type": "number"
                 },
@@ -1228,10 +1228,6 @@ const docTemplate = `{
                     "description": "В Прикрепление передних долей вымени",
                     "type": "number"
                 },
-                "limbsDeception": {
-                    "description": "К Обмускульность",
-                    "type": "number"
-                },
                 "limbsForelegWalk": {
                     "description": "К Поступь передних ног",
                     "type": "number"
@@ -1250,6 +1246,10 @@ const docTemplate = `{
                 },
                 "limbsHoofAngle": {
                     "description": "К Угол копыта",
+                    "type": "number"
+                },
+                "limbsMuscularity": {
+                    "description": "К Обмускульность",
                     "type": "number"
                 },
                 "milkTypeBackBoneQuality": {
