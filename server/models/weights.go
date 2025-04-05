@@ -27,21 +27,21 @@ type Weights struct {
 	MilkTypeBackBoneQuality float64 `` // МТ качество костяка
 	MilkTypeTopLine         float64 `` // МТ Линия верха
 
-	BodySacrumHeight float64 `` // Т высота в крестце
-	BodyChestWidth   float64 `` // Т Ширина груди
-	BodyBodyDepth    float64 `` // Т Глубина туловища
-	BodyDeception    float64 `` // Т Обмускульность
+	BodySacrumHeight float64 ``                     // Т высота в крестце
+	BodyChestWidth   float64 ``                     // Т Ширина груди
+	BodyBodyDepth    float64 ``                     // Т Глубина туловища
+	BodyMuscularity  float64 `json:"bodyDeception"` // Т Обмускульность
 
 	SacrumAngle  float64 `` // Кр Угол наклона крестца
 	SacrumWidth  float64 `` // Кр ширина в крестце
 	SacrumLength float64 `` // Кр Длина крестца
 
-	LimbsForelegWalk         float64 `` // К Поступь передних ног
-	LimbsHindLegWalkSideView float64 `` // К Поступь задних ног вид сбоку
-	LimbsHindLegWalkBackView float64 `` // К Поступь задних ног вид cзади
-	LimbsDeception           float64 `` // К Обмускульность
-	LimbsHoofAngle           float64 `` // К Угол копыта
-	LimbsHarmonyOfMovement   float64 `` // К Гармоничность движения
+	LimbsForelegWalk         float64 ``                      // К Поступь передних ног
+	LimbsHindLegWalkSideView float64 ``                      // К Поступь задних ног вид сбоку
+	LimbsHindLegWalkBackView float64 ``                      // К Поступь задних ног вид cзади
+	LimbsMuscularity         float64 `json:"limbsDeception"` // К Обмускульность
+	LimbsHoofAngle           float64 ``                      // К Угол копыта
+	LimbsHarmonyOfMovement   float64 ``                      // К Гармоничность движения
 
 	UdderDepth                      float64 `` // В Глубина вымени
 	FrontNippleLength               float64 `` // В Длинна передних сосков
