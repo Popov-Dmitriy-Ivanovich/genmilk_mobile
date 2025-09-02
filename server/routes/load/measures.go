@@ -8,13 +8,13 @@ import (
 )
 
 type MeasuresInput struct {
-	Cow            models.Cow            `validate:"required"` // Загружаемая корова
-	Exterior       models.Exterior       `validate:"required"` // Экстерьер коровы
-	Measures       models.Measures       `validate:"required"` // Замеры коровы
+	Cow            models.Cow            `` // Загружаемая корова
+	Exterior       *models.Exterior       `` // Экстерьер коровы
+	Measures       *models.Measures       `` // Замеры коровы
 	DownSides      *models.DownSides     // Недостатки
-	Ratings        models.Ratings        `validate:"required"` // Оценки экстерьера
-	AdditionalInfo models.AdditionalInfo `validate:"required"` // Доп. информация к измерению
-	Weights        models.Weights        `validate:"required"` // Веса использованные в расчете
+	Ratings        *models.Ratings        `` // Оценки экстерьера
+	AdditionalInfo *models.AdditionalInfo `` // Доп. информация к измерению
+	Weights        *models.Weights        `` // Веса использованные в расчете
 }
 
 func (mi MeasuresInput) Validate() error {
@@ -90,13 +90,16 @@ func (l Load) LoadMeasuredData() gin.HandlerFunc {
 			return
 		}
 		cowExterior := mInput.Exterior
-		cowExterior.User = user
-		cowExterior.Measures = mInput.Measures
-		cowExterior.DownSides = mInput.DownSides
-		cowExterior.Ratings = mInput.Ratings
-		cowExterior.AdditionalInfo = mInput.AdditionalInfo
-		cowExterior.Weights = mInput.Weights
-		cow.Exteriors = append(cow.Exteriors, cowExterior)
+		if (cowExterior != nil) {
+			cowExterior.User = user
+			cowExterior.Measures = mInput.Measures
+			cowExterior.DownSides = mInput.DownSides
+			cowExterior.Ratings = mInput.Ratings
+			cowExterior.AdditionalInfo = mInput.AdditionalInfo
+			cowExterior.Weights = mInput.Weights
+			cow.Exteriors = append(cow.Exteriors, *cowExterior)
+		}
+		
 
 		if err := db.Save(&cow).Error; err != nil {
 			c.JSON(422, gin.H{"error": err.Error()})

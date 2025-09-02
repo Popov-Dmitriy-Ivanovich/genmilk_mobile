@@ -1,5 +1,5 @@
 package models
-
+// TODO: везде убрать валидацию, везде убираем обязательность
 import (
 	"gorm.io/driver/postgres"
 	"gorm.io/driver/sqlite"

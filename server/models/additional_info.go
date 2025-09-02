@@ -6,14 +6,18 @@ type AdditionalInfo struct {
 
 	AdditionalProperty1Name *string // Дополнительный параметр 1 (название)
 	AdditionalProperty2Name *string // Дополнительный параметр 2 (название)
+	AdditionalProperty3Name *string // Дополнительный параметр 3 (название)
 
 	AdditionalProperty1Value *string // Дополнительный параметр 1 (значение в баллах)
 	AdditionalProperty2Value *string // Дополнительный параметр 2 (значение в баллах)
+	AdditionalProperty3Value *string // Дополнительный параметр 3 (значение в баллах)
 
 	AdditionalProperty1Measure *string // Дополнительный параметр 1 (значение в единицах измерения)
 	AdditionalProperty2Measure *string // Дополнительный параметр 2 (значение в единицах измерения)
-
-	LactationNumber  uint      // Номер лактации (целое, беззнаковое число)
+	AdditionalProperty3Measure *string // Дополнительный параметр 3 (значение в единицах измерения)
+	
+	LactationNumber  *uint      // Номер лактации (целое, беззнаковое число)
 	CalvingDate      *DateOnly `json:",string" example:"2001-03-23" swaggertype:"string" ` // Дата отела ГГГГ-ММ-ДД
 	FirstMilkingDate *DateOnly `json:",string" example:"2001-03-23" swaggertype:"string" ` // Дата первого доения ГГГГ-ММ-ДД
 }
+// TODO: Добавить еще 1 доп. признак
