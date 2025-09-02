@@ -534,14 +534,6 @@ const docTemplate = `{
     "definitions": {
         "load.MeasuresInput": {
             "type": "object",
-            "required": [
-                "additionalInfo",
-                "cow",
-                "exterior",
-                "measures",
-                "ratings",
-                "weights"
-            ],
             "properties": {
                 "additionalInfo": {
                     "description": "Доп. информация к измерению",
@@ -628,6 +620,18 @@ const docTemplate = `{
                     "description": "Дополнительный параметр 2 (значение в баллах)",
                     "type": "string"
                 },
+                "additionalProperty3Measure": {
+                    "description": "Дополнительный параметр 3 (значение в единицах измерения)",
+                    "type": "string"
+                },
+                "additionalProperty3Name": {
+                    "description": "Дополнительный параметр 3 (название)",
+                    "type": "string"
+                },
+                "additionalProperty3Value": {
+                    "description": "Дополнительный параметр 3 (значение в баллах)",
+                    "type": "string"
+                },
                 "calvingDate": {
                     "description": "Дата отела ГГГГ-ММ-ДД",
                     "type": "string",
@@ -646,14 +650,6 @@ const docTemplate = `{
         },
         "models.Cow": {
             "type": "object",
-            "required": [
-                "breedName",
-                "holdingInn",
-                "holdingName",
-                "hozName",
-                "inventoryNumber",
-                "selecsNumber"
-            ],
             "properties": {
                 "birthDate": {
                     "description": "Дата рождения ГГГГ-ММ-ЧЧ",
@@ -669,6 +665,10 @@ const docTemplate = `{
                     "description": "Название породы",
                     "type": "string",
                     "example": "Порода"
+                },
+                "defects": {
+                    "description": "пороки (если несколько, то разделитель /)",
+                    "type": "string"
                 },
                 "exteriors": {
                     "description": "Оценки экстерьера",
@@ -777,51 +777,35 @@ const docTemplate = `{
                 },
                 "backBoneQuality": {
                     "description": "Качество костяка (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "backNippleDiameter": {
                     "description": "Диаметр задних сосков (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "backNippleLocationBackView": {
                     "description": "Расположение задних сосков вид сзади (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "backUdderSegmentsLocationHeight": {
                     "description": "Высота прикрепления задних долей вымени (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "backUdderSegmentsWidth": {
                     "description": "Ширина задних долей вымени (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "body": {
                     "description": "Туловище (100 баллов)",
-                    "type": "number",
-                    "maximum": 100,
-                    "minimum": -100
+                    "type": "number"
                 },
                 "bodyDepth": {
                     "description": "Глубина туловища (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "bodyType": {
                     "description": "Тип телосложения (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "category": {
                     "description": "Категория (хорошо, плохо и т.д.) ХЗ зачем это надо, но мало ли в разных хозяйствах категории разные",
@@ -829,174 +813,120 @@ const docTemplate = `{
                 },
                 "centralLigamentDepth": {
                     "description": "Глубина центральной связки (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "chestWidth": {
                     "description": "Ширина груди (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "downSides": {
                     "$ref": "#/definitions/models.DownSides"
                 },
                 "fatness": {
                     "description": "Упитанность (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
-                "forelegWalk": {
+                "foreLegWalk": {
                     "description": "Поступь передних ног (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "frontNippleDiameter": {
                     "description": "Диаметр передних сосков (9 балов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "frontNippleLength": {
                     "description": "Длинна передних сосков (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "frontNippleLocationBackView": {
                     "description": "Расположение передних сосков вид сзади (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "frontUdderSegmentsLocation": {
                     "description": "Прикрепление передних долей вымени (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "harmonyOfMovement": {
                     "description": "Гармоничность движения (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "hindLegWalkBackView": {
                     "description": "Поступь задних ног вид cзади (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "hindLegWalkSideView": {
                     "description": "Поступь задних ног вид сбоку (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "hoofAngle": {
                     "description": "Угол копыта (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "limbs": {
                     "description": "Конечности (100 баллов)",
-                    "type": "number",
-                    "maximum": 100,
-                    "minimum": -100
+                    "type": "number"
                 },
                 "measures": {
                     "$ref": "#/definitions/models.Measures"
                 },
                 "milkType": {
                     "description": "Молочный тип (100 баллов)",
-                    "type": "number",
-                    "maximum": 100,
-                    "minimum": -100
+                    "type": "number"
                 },
                 "muscularity": {
                     "description": "Обмускульность (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "rating": {
                     "description": "Суммарный рейтинг (100 баллов)",
-                    "type": "number",
-                    "maximum": 100,
-                    "minimum": -100
+                    "type": "number"
                 },
                 "ratings": {
                     "$ref": "#/definitions/models.Ratings"
                 },
                 "ribsAngle": {
                     "description": "Угол наклона ребер (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "sacrum": {
                     "description": "Крестец (100 баллов)",
-                    "type": "number",
-                    "maximum": 100,
-                    "minimum": -100
+                    "type": "number"
                 },
                 "sacrumAngle": {
                     "description": "Угол наклона крестца (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "sacrumHeight": {
                     "description": "Высота в крестце (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "sacrumLength": {
                     "description": "Длина крестца (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "sacrumWidth": {
                     "description": "Ширина в крестце (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "topLine": {
                     "description": "Линия верха (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "udder": {
                     "description": "Вымя (100 баллов)",
-                    "type": "number",
-                    "maximum": 100,
-                    "minimum": -100
+                    "type": "number"
                 },
                 "udderBalance": {
                     "description": "Баланс вымени (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "udderDepth": {
                     "description": "Глубина вымени (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "udderVeins": {
                     "description": "Выраженность вен вымени (9 баллов)",
-                    "type": "number",
-                    "maximum": 9,
-                    "minimum": -9
+                    "type": "number"
                 },
                 "weights": {
                     "$ref": "#/definitions/models.Weights"

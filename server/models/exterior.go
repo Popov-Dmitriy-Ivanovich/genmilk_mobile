@@ -30,7 +30,8 @@ type Ratings struct {
 	AutomaticWithDownsidesLimbs    *float64 `` // Конечности (100 баллов) рассчитанный автоматически с учетом недостатков
 	AutomaticWithDownsidesUdder    *float64 `` // Вымя (100 баллов) рассчитанный автоматически с учетом недостатков
 	AutomaticWithDownsidesSacrum   *float64 `` // Крестец (100 баллов) рассчитанный автоматически с учетом недостатков
-} 
+}
+
 // TODO: сделать крестец необязательным
 
 type Exterior struct {
@@ -48,7 +49,7 @@ type Exterior struct {
 	Weights        *Weights
 
 	Rating   *float64 `` // Суммарный рейтинг (100 баллов)
-	Category *string  ``                            // Категория (хорошо, плохо и т.д.) ХЗ зачем это надо, но мало ли в разных хозяйствах категории разные
+	Category *string  `` // Категория (хорошо, плохо и т.д.) ХЗ зачем это надо, но мало ли в разных хозяйствах категории разные
 
 	MilkType *float64 `` // Молочный тип (100 баллов)
 	Body     *float64 `` // Туловище (100 баллов)
@@ -66,7 +67,7 @@ type Exterior struct {
 	SacrumAngle  *float64 `` // Угол наклона крестца (9 баллов)
 
 	HarmonyOfMovement   *float64 `` // Гармоничность движения (9 баллов)
-	ForelegWalk         *float64 `` // Поступь передних ног (9 баллов)
+	ForeLegWalk         *float64 `` // Поступь передних ног (9 баллов)
 	HindLegWalkSideView *float64 `` // Поступь задних ног вид сбоку (9 баллов)
 	HindLegWalkBackView *float64 `` // Поступь задних ног вид cзади (9 баллов)
 	HoofAngle           *float64 `` // Угол копыта (9 баллов)
@@ -89,4 +90,5 @@ type Exterior struct {
 	BackNippleDiameter  *float64 `` // Диаметр задних сосков (9 баллов)
 	UdderVeins          *float64 `` // Выраженность вен вымени (9 баллов)
 }
+
 // TODO: Сделать соответсвие признаково + добавить если не хватает
