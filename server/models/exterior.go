@@ -39,7 +39,7 @@ type Exterior struct {
 	CowID uint `json:"-"`
 
 	UserID uint `json:"-" gorm:"index"`
-	User   User `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;" json:"-"`
+	User   User `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;"`
 
 	AssessmentDate *DateOnly `json:",string" example:"2001-03-23" swaggertype:"string" ` // Дата проведения оценочных мероприятий ГГГГ-ММ-ДД
 	Measures       *Measures
